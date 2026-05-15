@@ -2769,13 +2769,19 @@ body.lb-locked{ overflow:hidden; }
       var text = el.textContent;
       el.innerHTML = '';
       var i = 0;
-      text.split('').forEach(function(ch){
-        var span = document.createElement('span');
-        span.className = 'char';
-        span.style.setProperty('--char-i', i);
-        span.textContent = ch === ' ' ? ' ' : ch;
-        el.appendChild(span);
-        if(ch !== ' ') i++;
+      text.split(' ').forEach(function(word, wi){
+        if(wi > 0) el.appendChild(document.createTextNode(' '));
+        var wordWrap = document.createElement('span');
+        wordWrap.style.cssText = 'display:inline-block; white-space:nowrap;';
+        word.split('').forEach(function(ch){
+          var span = document.createElement('span');
+          span.className = 'char';
+          span.style.setProperty('--char-i', i);
+          span.textContent = ch;
+          wordWrap.appendChild(span);
+          i++;
+        });
+        el.appendChild(wordWrap);
       });
     });
     var io = new IntersectionObserver(function(entries){
