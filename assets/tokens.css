@@ -1,0 +1,191 @@
+/* ============================================================
+   Hirschsprung Design System — "Sonne & Schiefer"
+   Color + Type tokens
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* ── Color · Slate (primary) ───────────────────────────── */
+  --color-slate-900: #1C1F24;  /* tiefster Schiefer */
+  --color-slate-800: #2B2F35;  /* Hauptdunkel · Hero, Primärtext */
+  --color-slate-700: #3D4248;  /* Sekundärtext auf hellem Grund */
+  --color-slate-500: #5C6470;  /* Body-Text dunkel */
+  --color-slate-300: #B8BCC4;  /* Body-Text auf dunklem Grund */
+  --color-slate-200: #DDD9D0;  /* Borders, Dividers */
+
+  /* ── Color · Sun (accent) ──────────────────────────────── */
+  --color-sun-500: #E8B452;    /* Hauptakzent */
+  --color-sun-700: #9C7820;    /* Sonnengelb auf hellem Grund */
+  --color-sun-100: #FBF1DB;    /* sehr dezenter Hintergrund-Akzent */
+
+  /* ── Color · Backgrounds ───────────────────────────────── */
+  --color-bg-cream: #F5F2EA;   /* Sektions-Hintergrund */
+  --color-bg-white: #FFFFFF;   /* Cards */
+  --color-bg-warm:  #FAF7F0;   /* Body-Background */
+
+  /* ── Color · Semantic ──────────────────────────────────── */
+  --color-success: #5C8A52;
+  --color-warning: #C9802A;
+  --color-text-on-dark: #F5F2EA;
+  --color-text-on-sun:  #2B2F35;
+
+  /* Foreground shortcuts */
+  --fg-1: var(--color-slate-800);
+  --fg-2: var(--color-slate-500);
+  --fg-3: var(--color-slate-700);
+  --fg-on-dark-1: var(--color-text-on-dark);
+  --fg-on-dark-2: var(--color-slate-300);
+  --accent: var(--color-sun-500);
+  --accent-ink: var(--color-sun-700);
+
+  /* ── Typography · Families ─────────────────────────────── */
+  --font-serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ── Typography · Sizes (Desktop) ──────────────────────── */
+  --text-h1:        58px;
+  --text-h2:        40px;
+  --text-h3:        24px;
+  --text-h4:        18px;
+  --text-body-lg:   17px;
+  --text-body:      15px;
+  --text-body-sm:   13px;
+  --text-eyebrow:   11px;
+
+  /* ── Spacing (8px-Raster) ──────────────────────────────── */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-8:  48px;
+  --space-10: 64px;
+  --space-12: 96px;
+
+  /* ── Layout ────────────────────────────────────────────── */
+  --container-max:     1200px;
+  --container-narrow:   720px;
+  --container-content:  960px;
+
+  /* ── Radius ────────────────────────────────────────────── */
+  --radius-sm:  4px;
+  --radius-md:  6px;
+  --radius-lg:  8px;
+  --radius-xl: 12px;
+
+  /* ── Borders (0.5px = edle Anmutung) ───────────────────── */
+  --border-hairline: 0.5px solid var(--color-slate-200);
+  --border-dark:     0.5px solid var(--color-slate-800);
+  --border-light:    0.5px solid var(--color-text-on-dark);
+
+  /* ── Transitions ───────────────────────────────────────── */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ── Brand · Signature accents ─────────────────────────── */
+  --sun-stripe-w: 32px;
+  --sun-stripe-h: 3px;
+  --sun-glow: radial-gradient(circle at top right, rgba(232,180,82,0.18) 0%, transparent 60%);
+}
+
+/* ── Mobile overrides ───────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --text-h1: 38px;
+    --text-h2: 28px;
+    --text-h3: 22px;
+    --space-12: 64px;
+    --space-10: 48px;
+  }
+}
+
+/* ============================================================
+   Base styles + semantic typography classes
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--color-bg-warm);
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  color: var(--fg-1);
+  margin: 0;
+}
+
+h1 { font-size: var(--text-h1); line-height: 1.02; letter-spacing: -0.01em; }
+h2 { font-size: var(--text-h2); line-height: 1.10; letter-spacing: -0.005em; }
+h3 { font-size: var(--text-h3); line-height: 1.15; }
+
+h4 {
+  font-family: var(--font-sans);
+  font-size: var(--text-h4);
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 0;
+}
+
+p { margin: 0; }
+
+.lead {
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+
+.body-sm {
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+}
+
+/* Eyebrow: the brand-defining UPPERCASE label */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.eyebrow--on-dark { color: var(--color-sun-500); }
+
+/* Eyebrow with the 24px sun-stripe in front */
+.eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow-wrap::before {
+  content: '';
+  width: 24px;
+  height: 3px;
+  background: var(--color-sun-500);
+  flex: 0 0 24px;
+}
+
+/* The brand signal: 32×3px sun stripe top-left on USP cards */
+.sun-stripe::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--sun-stripe-w);
+  height: var(--sun-stripe-h);
+  background: var(--color-sun-500);
+}

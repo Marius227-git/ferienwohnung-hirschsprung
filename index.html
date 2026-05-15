@@ -1,0 +1,2556 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>5-Sterne Ferienwohnung Hirschsprung – Auszeit im Allgäu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="5-Sterne Ferienwohnung im neuen Holzhaus zwischen Tiefenbach &amp; Obermaiselstein. 88 m², Süd-Balkon, Bergblick aufs Allgäuer Dreigestirn. Jetzt Auszeit sichern.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.395.0/dist/umd/lucide.min.js"></script>
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   Hirschsprung — Onepager · Stil "Sonne & Schiefer"
+   Tokens gespiegelt aus design-system/colors_and_type.css
+   ════════════════════════════════════════════════════════════════ */
+:root{
+  --slate-900:#1C1F24; --slate-800:#2B2F35; --slate-700:#3D4248;
+  --slate-500:#5C6470; --slate-300:#B8BCC4; --slate-200:#DDD9D0;
+  --sun-500:#E8B452; --sun-700:#9C7820; --sun-100:#FBF1DB;
+  --bg-cream:#F5F2EA; --bg-white:#FFFFFF; --bg-warm:#FAF7F0;
+  --success:#5C8A52; --warning:#C9802A;
+  --on-dark:#F5F2EA; --on-sun:#2B2F35;
+
+  --font-serif:'Instrument Serif', Georgia, serif;
+  --font-sans:'Inter', system-ui, -apple-system, sans-serif;
+
+  --r-sm:4px; --r-md:6px; --r-lg:8px; --r-xl:12px;
+  --container:1200px; --narrow:720px;
+  --t-fast:150ms ease; --t-base:250ms ease;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background:var(--bg-warm); color:var(--slate-800);
+  font-family:var(--font-sans); font-size:15px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+h1,h2,h3{ font-family:var(--font-serif); font-weight:400; margin:0; color:var(--slate-800); text-wrap:pretty; }
+h1{ font-size:64px; line-height:1.0; letter-spacing:-0.015em; }
+h2{ font-size:44px; line-height:1.08; letter-spacing:-0.005em; }
+h3{ font-size:24px; line-height:1.2; }
+h4{ font-family:var(--font-sans); font-size:18px; font-weight:500; line-height:1.3; margin:0; }
+p{ margin:0; }
+a{ color:var(--sun-700); text-decoration:underline; text-underline-offset:2px; transition:color var(--t-fast); }
+a:hover{ color:var(--slate-800); }
+img{ display:block; max-width:100%; }
+
+.container{ max-width:var(--container); margin:0 auto; padding:0 24px; }
+.narrow{ max-width:var(--narrow); margin:0 auto; }
+
+/* ── Eyebrow ─────────────────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--font-sans);
+  font-size:11px; font-weight:500; letter-spacing:0.22em;
+  text-transform:uppercase; color:var(--sun-700); line-height:1.2; margin:0;
+}
+.eyebrow--on-dark{ color:var(--sun-500); }
+.eyebrow-wrap{ display:flex; align-items:center; gap:10px; }
+.eyebrow-wrap .eyebrow{ line-height:1; }
+.eyebrow-wrap::before{
+  content:''; width:24px; height:3px; background:var(--sun-500); flex:0 0 24px;
+  align-self:center; transform:translateY(-1px);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────── */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font:500 14px/1 var(--font-sans);
+  padding:15px 28px; border-radius:var(--r-md); cursor:pointer;
+  text-decoration:none; border:none; transition:background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+  white-space:nowrap;
+}
+.btn-primary{ background:var(--sun-500); color:var(--on-sun); }
+.btn-primary:hover{ background:#D9A03A; color:var(--on-sun); }
+.btn-secondary-dark{ background:transparent; color:var(--on-dark); border:0.5px solid var(--on-dark); }
+.btn-secondary-dark:hover{ background:rgba(245,242,234,0.10); color:var(--on-dark); }
+.btn-secondary-light{ background:transparent; color:var(--slate-800); border:0.5px solid var(--slate-800); }
+.btn-secondary-light:hover{ background:rgba(43,47,53,0.05); color:var(--slate-800); }
+.btn-lg{ padding:18px 34px; font-size:15px; }
+.btn svg{ width:16px; height:16px; }
+
+/* ── Top Nav (transparent on hero, frosted on scroll) ───────────── */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:transparent;
+  border-bottom:0.5px solid transparent;
+  transition:background var(--t-base), border-color var(--t-base), backdrop-filter var(--t-base);
+}
+.nav.scrolled{
+  background:rgba(250,247,240,0.78);
+  -webkit-backdrop-filter:saturate(140%) blur(14px);
+          backdrop-filter:saturate(140%) blur(14px);
+  border-bottom-color:var(--slate-200);
+}
+.nav-inner{
+  max-width:var(--container); margin:0 auto; padding:14px 24px;
+  display:flex; align-items:center; justify-content:space-between; gap:24px;
+}
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--on-dark); transition:color var(--t-base); }
+.brand-stripe{ width:24px; height:3px; background:var(--sun-500); flex:0 0 24px; }
+.brand-logo{
+  height:64px; width:auto; display:block;
+  filter:brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.55));
+  transition:filter var(--t-base);
+}
+.brand-name{ font-family:var(--font-serif); font-size:22px; line-height:1; }
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+.nav-links{ display:flex; gap:28px; align-items:center; }
+.nav-links a:not(.btn){
+  color:rgba(245,242,234,0.85); text-decoration:none; font-size:14px;
+  transition:color var(--t-base);
+}
+.nav-links a:not(.btn):hover{ color:var(--on-dark); }
+/* When scrolled, swap to dark text & restore logo color */
+.nav.scrolled .brand{ color:var(--slate-800); }
+.nav.scrolled .brand-logo{
+  filter:none;
+}
+.nav.scrolled .nav-links a:not(.btn){ color:var(--slate-700); }
+.nav.scrolled .nav-links a:not(.btn):hover{ color:var(--slate-800); }
+.nav-cta{ padding:11px 20px; font-size:13px; }
+@media (max-width:760px){
+  .nav-links a:not(.btn){ display:none; }
+  .brand-logo{ height:52px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 1 · HERO (full-bleed photo)
+   ════════════════════════════════════════════════════════════════ */
+.hero-wrap{ padding:0; }
+.hero{
+  position:relative; overflow:hidden;
+  background:#1C1F24 url('assets/hero-haus.webp') center 35% / cover no-repeat;
+  color:var(--on-dark);
+  min-height:100vh;
+  display:flex; align-items:flex-end;
+  padding:120px 0 80px;
+}
+/* Reading overlay — dark wash from left, bottom darker, gold glow top-right */
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background:
+    linear-gradient(95deg, rgba(28,31,36,0.82) 0%, rgba(28,31,36,0.62) 35%, rgba(28,31,36,0.18) 70%, rgba(28,31,36,0.05) 100%),
+    linear-gradient(180deg, rgba(28,31,36,0.45) 0%, rgba(28,31,36,0) 25%, rgba(28,31,36,0) 55%, rgba(28,31,36,0.55) 100%),
+    radial-gradient(circle at top right, rgba(232,180,82,0.16) 0%, transparent 50%);
+  z-index:0; pointer-events:none;
+}
+/* Subtle text shadow as final readability safety net */
+.hero h1, .hero .lead, .hero .sub{
+  text-shadow:0 1px 24px rgba(28,31,36,0.35);
+}
+.hero-photo-label{
+  position:absolute; bottom:18px; right:24px; z-index:2;
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:rgba(245,242,234,0.7); font-weight:500;
+}
+.hero > .container{ position:relative; z-index:1; width:100%; }
+.hero-inner{ position:relative; z-index:1; max-width:680px; width:100%; }
+.hero .eyebrow-wrap{ margin-bottom:28px; }
+.hero h1{ color:var(--on-dark); margin:0 0 28px; }
+.hero h1 br{ }
+.hero .lead{
+  font-size:18px; line-height:1.65; color:var(--slate-300);
+  max-width:540px; margin-bottom:40px;
+}
+.hero .sub{
+  display:flex; gap:18px 24px; flex-wrap:wrap; align-items:center;
+  font-size:13px; color:var(--slate-300);
+  margin-bottom:36px;
+}
+.hero .sub b{ color:var(--on-dark); font-weight:500; }
+.hero .sub span{ display:inline-flex; align-items:center; gap:8px; }
+.hero .sub .dot{
+  width:4px; height:4px; border-radius:50%; background:var(--sun-500);
+  display:inline-block; opacity:.8;
+}
+.cta-group{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:48px; }
+
+/* Trust block */
+.trust-block{
+  position:relative;
+  background:rgba(245,242,234,0.08);
+  border-radius:var(--r-md);
+  padding:22px 26px;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;
+  border:0.5px solid rgba(245,242,234,0.12);
+}
+.trust-cell .trust-label{
+  font-size:10px; font-weight:500; letter-spacing:0.22em;
+  text-transform:uppercase; color:var(--sun-500); margin:0 0 8px;
+}
+.trust-cell .trust-value{
+  font-size:18px; font-weight:500; color:var(--on-dark); margin:0;
+  font-family:var(--font-sans); line-height:1.2;
+}
+.trust-cell .trust-value small{
+  font-weight:400; font-size:12px; color:var(--slate-300); margin-left:4px;
+}
+
+@media (max-width:960px){
+  .hero{ padding:120px 0 56px; min-height:92vh; background-position:center center; }
+  .hero h1{ font-size:42px; }
+  .hero .lead{ font-size:16px; }
+  .trust-block{ grid-template-columns:repeat(2, 1fr); padding:18px 20px; gap:18px; }
+  .hero::before{
+    background:
+      linear-gradient(180deg, rgba(28,31,36,0.55) 0%, rgba(28,31,36,0.40) 25%, rgba(28,31,36,0.70) 60%, rgba(28,31,36,0.92) 100%),
+      radial-gradient(circle at top right, rgba(232,180,82,0.16) 0%, transparent 55%);
+  }
+  .hero-photo-label{ display:none; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Section base
+   ════════════════════════════════════════════════════════════════ */
+section.block{ padding:96px 0; }
+.block-header{ max-width:700px; margin:0 auto 56px; text-align:center; }
+.block-header .eyebrow-wrap{ justify-content:center; margin-bottom:18px; }
+.block-header h2{ margin:0 0 14px; }
+.block-header p{ font-size:17px; color:var(--slate-500); line-height:1.7; }
+.block-header.left{ text-align:left; margin-left:0; }
+.block-header.left .eyebrow-wrap{ justify-content:flex-start; }
+
+@media (max-width:768px){
+  section.block{ padding:64px 0; }
+  h1{ font-size:42px; }
+  h2{ font-size:32px; }
+  h3{ font-size:22px; }
+  .block-header{ margin-bottom:40px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 2 · USP-Karten
+   ════════════════════════════════════════════════════════════════ */
+.emblem{
+  display:flex; justify-content:center; align-items:center;
+  margin:0 auto 36px;
+  width:170px; height:170px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 25%, #FFFFFF 0%, var(--bg-warm) 75%);
+  border:0.5px solid var(--slate-200);
+  position:relative;
+  box-shadow:
+    0 1px 1px rgba(232,180,82,0.10),
+    0 18px 32px -10px rgba(28,31,36,0.18),
+    0 40px 60px -20px rgba(28,31,36,0.14),
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    inset 0 -8px 24px rgba(232,180,82,0.06);
+}
+.emblem::before{
+  content:''; position:absolute; inset:10px;
+  border-radius:50%;
+  border:0.5px solid rgba(232,180,82,0.30);
+  pointer-events:none;
+}
+.emblem-ring{
+  position:absolute; inset:-6px;
+  width:calc(100% + 12px); height:calc(100% + 12px);
+  pointer-events:none;
+  overflow:visible;
+}
+.emblem-ring .track{
+  fill:none; stroke:rgba(28,31,36,0.06); stroke-width:1.2;
+}
+.emblem-ring .progress{
+  fill:none; stroke:var(--sun-500); stroke-width:2;
+  stroke-linecap:round;
+  transform:rotate(-90deg); transform-origin:50% 50%;
+  transition:stroke-dashoffset 120ms linear;
+  filter:drop-shadow(0 0 6px rgba(232,180,82,0.5));
+}
+.emblem img{
+  width:120px; height:auto; display:block;
+  filter:drop-shadow(0 1px 1px rgba(28,31,36,0.06));
+  position:relative; z-index:1;
+}
+.usp-grid{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+}
+.usp-card{
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  padding:36px 28px 32px;
+  position:relative; overflow:hidden;
+}
+.usp-card::before{
+  content:''; position:absolute; top:0; left:0;
+  width:32px; height:3px; background:var(--sun-500);
+}
+.usp-icon{
+  width:40px; height:40px; background:var(--slate-800);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  margin-bottom:24px;
+}
+.usp-icon svg{ stroke:var(--sun-500); width:20px; height:20px; }
+.usp-card h3{ margin:0 0 12px; font-size:22px; line-height:1.25; }
+.usp-card p{ font-size:14.5px; line-height:1.7; color:var(--slate-500); }
+@media (max-width:760px){ .usp-grid{ grid-template-columns:1fr; } }
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 3 · Emotionaler Teaser
+   ════════════════════════════════════════════════════════════════ */
+.teaser{ background:var(--bg-cream); }
+.teaser-inner{ max-width:720px; margin:0 auto; text-align:center; }
+.teaser-inner .eyebrow-wrap{ justify-content:center; margin-bottom:20px; }
+.teaser h2{ margin-bottom:28px; font-style:italic; }
+.teaser p{
+  font-size:17.5px; line-height:1.85; color:var(--slate-700);
+  margin-bottom:18px;
+}
+.teaser p:last-child{ font-family:var(--font-serif); font-size:21px; font-style:italic; color:var(--slate-800); line-height:1.45; margin-top:32px; }
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 4 · CONVERSION-ANKER (kompakt)
+   ════════════════════════════════════════════════════════════════ */
+.anchor-wrap{ padding:0 0 24px; margin-top:-32px; position:relative; z-index:2; }
+.anchor{
+  max-width:980px; margin:0 auto;
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-xl);
+  padding:24px 28px;
+  position:relative; overflow:hidden;
+  box-shadow:0 6px 24px rgba(28,31,36,0.06);
+}
+.anchor::before{
+  content:''; position:absolute; top:0; left:0;
+  width:48px; height:3px; background:var(--sun-500);
+}
+.anchor-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr 1fr auto;
+  gap:18px; align-items:end;
+}
+.anchor-meta{
+  align-self:center;
+}
+.anchor-meta .eyebrow{ margin-bottom:6px; }
+.anchor-meta .anchor-title{
+  font-family:var(--font-serif); font-size:22px; line-height:1.2; color:var(--slate-800);
+  margin:0 0 6px;
+}
+.anchor-meta .anchor-sub{
+  font-size:13px; color:var(--slate-500); line-height:1.4;
+  display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+}
+.anchor-meta .anchor-sub b{ color:var(--slate-800); font-weight:500; }
+.anchor-meta .anchor-sub .star{
+  display:inline-flex; align-items:center; gap:4px; color:var(--slate-700); font-weight:500;
+}
+.anchor-meta .anchor-sub .star svg{ width:14px; height:14px; fill:var(--sun-500); }
+
+.field{ display:flex; flex-direction:column; gap:6px; }
+.field label{
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--sun-700); font-weight:500;
+}
+.field input, .field select{
+  background:var(--bg-warm);
+  border:0.5px solid var(--slate-200); border-radius:var(--r-sm);
+  padding:12px 14px; font:400 14px/1.4 var(--font-sans); color:var(--slate-800);
+  transition:border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.field input:focus, .field select:focus{
+  outline:none; border-color:var(--sun-500);
+  box-shadow:0 0 0 3px rgba(232,180,82,0.15);
+}
+.anchor .btn{ height:46px; padding:0 24px; }
+
+@media (max-width:880px){
+  .anchor-wrap{ margin-top:0; padding:24px 0 0; }
+  .anchor-grid{ grid-template-columns:1fr 1fr; }
+  .anchor-meta{ grid-column:1 / -1; margin-bottom:6px; }
+  .anchor .btn{ grid-column:1 / -1; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 5 · Die Wohnung — Galerie + Highlights
+   ════════════════════════════════════════════════════════════════ */
+.wohnung-layout{
+  display:block;
+}
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  grid-template-rows:380px 280px 280px;
+  gap:14px;
+}
+.gallery-tile{
+  border-radius:var(--r-lg); overflow:hidden; position:relative;
+  background:linear-gradient(135deg, #4A5560 0%, #2B2F35 100%);
+  border:0.5px solid var(--slate-200);
+  cursor:pointer; transition:transform var(--t-base);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:22px;
+}
+.gallery-tile::after{
+  content:''; position:absolute; left:0; right:0; bottom:0;
+  height:38%;
+  background:linear-gradient(to top,
+    rgba(28,31,36,0.96) 0%,
+    rgba(28,31,36,0.78) 35%,
+    rgba(28,31,36,0.35) 75%,
+    transparent 100%);
+  pointer-events:none; z-index:0;
+}
+.gallery-tile:hover{ transform:translateY(-2px); }
+.gallery-tile .tile-label{
+  font-family:var(--font-serif); font-style:italic;
+  font-size:16px; color:var(--on-dark); opacity:.95; line-height:1.4;
+  position:relative; z-index:1;
+  text-shadow:0 1px 8px rgba(0,0,0,0.4);
+}
+.gallery-tile .tile-meta{
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--sun-500); font-weight:500; margin-bottom:6px;
+  position:relative; z-index:1;
+  text-shadow:0 1px 6px rgba(0,0,0,0.5);
+}
+.gallery-tile.feature{ grid-column:span 2; grid-row:span 2; }
+.gallery-tile.feature .tile-label{ font-size:20px; }
+.gallery-tile.t1{
+  background:url('assets/gallery-wohnraum.jpg') center center / cover no-repeat;
+}
+.gallery-tile.t2{
+  background:url('assets/gallery-balkon.jpg') center 30% / cover no-repeat;
+}
+.gallery-tile.t3{
+  background:url('assets/gallery-kueche.jpg') center center / cover no-repeat;
+}
+.gallery-tile.t4{
+  background:url('assets/gallery-schlafzimmer.jpg') center center / cover no-repeat;
+}
+.gallery-tile.t5{
+  background:url('assets/gallery-bad.jpg') center center / cover no-repeat;
+}
+.gallery-tile.t6{
+  background:url('assets/gallery-sofa.jpg') center 75% / cover no-repeat;
+}
+
+.highlights{
+  margin-top:24px;
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  padding:32px 36px;
+  position:relative; overflow:hidden;
+}
+.highlights::before{
+  content:''; position:absolute; top:0; left:0;
+  width:32px; height:3px; background:var(--sun-500);
+}
+.highlights .h-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  flex-wrap:wrap; gap:12px; margin-bottom:24px;
+}
+.highlights .eyebrow{ margin:0; }
+.highlights h3{ margin:0; font-size:24px; }
+.highlights ul{
+  list-style:none; padding:0; margin:0;
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:18px 28px;
+}
+.highlights li{
+  display:flex; gap:12px; align-items:flex-start;
+  font-size:14.5px; color:var(--slate-700); line-height:1.5;
+}
+.highlights li svg{
+  width:18px; height:18px; stroke:var(--sun-700);
+  flex:0 0 18px; margin-top:2px;
+}
+.highlights li b{ color:var(--slate-800); font-weight:500; }
+
+@media (max-width:960px){
+  .gallery{ grid-template-columns:repeat(2, 1fr); grid-template-rows:300px 240px 240px 260px; }
+  .gallery-tile.feature{ grid-column:span 2; grid-row:span 1; }
+  .gallery-tile.feature .tile-label{ font-size:18px; }
+  .gallery-tile.t6{ grid-column:span 2; }
+  .highlights{ padding:28px 24px; }
+  .highlights ul{ grid-template-columns:repeat(2, 1fr); gap:16px 22px; }
+}
+@media (max-width:560px){
+  .highlights ul{ grid-template-columns:1fr; }
+}
+
+/* ── Saison-Galerien (Sommer/Winter Thumbnails) ─────────────────── */
+.seasons{ margin-top:40px; }
+.season-row{ margin-bottom:32px; }
+.season-row:last-child{ margin-bottom:0; }
+.season-head{
+  display:flex; align-items:baseline; gap:14px;
+  margin-bottom:14px;
+}
+.season-head .eyebrow{ margin:0; }
+.season-head .s-title{
+  font-family:var(--font-serif); font-size:22px; color:var(--slate-800); line-height:1;
+}
+.season-head .s-meta{
+  font-size:12px; color:var(--slate-500); margin-left:auto;
+}
+.thumb-grid{
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:10px;
+}
+.thumb{
+  position:relative; overflow:hidden; cursor:zoom-in;
+  aspect-ratio:1/1; border-radius:var(--r-md);
+  border:0.5px solid var(--slate-200);
+  background-size:cover; background-position:center;
+  transition:transform var(--t-base), box-shadow var(--t-fast);
+}
+.thumb:hover{ transform:translateY(-2px); box-shadow:0 6px 16px -6px rgba(28,31,36,0.20); }
+.thumb::after{
+  content:''; position:absolute; left:0; right:0; bottom:0;
+  height:50%;
+  background:linear-gradient(to top, rgba(28,31,36,0.85) 0%, rgba(28,31,36,0.45) 50%, transparent 100%);
+  pointer-events:none;
+}
+.thumb .thumb-label{ display:none; }
+.thumb .thumb-num{ display:none; }
+@media (max-width:960px){
+  .thumb-grid{ grid-template-columns:repeat(3, 1fr); }
+}
+@media (max-width:520px){
+  .thumb-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 6 · Grundriss + Räume im Detail
+   ════════════════════════════════════════════════════════════════ */
+.plan{ background:var(--bg-cream); }
+.plan-layout{
+  display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;
+}
+.plan-svg-wrap{
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  padding:28px;
+  position:relative; overflow:hidden;
+}
+.plan-img{
+  display:block; width:100%; height:auto;
+  border-radius:var(--r-sm);
+}
+.plan-svg-wrap::before{
+  content:''; position:absolute; top:0; left:0;
+  width:32px; height:3px; background:var(--sun-500);
+}
+.plan-caption{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-top:16px; padding-top:16px; border-top:0.5px solid var(--slate-200);
+}
+.plan-caption .cap-meta{ font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--sun-700); font-weight:500; }
+.plan-caption .cap-area{ font-family:var(--font-serif); font-size:24px; color:var(--slate-800); }
+
+.rooms{ display:grid; gap:14px; }
+.room{
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-md);
+  padding:18px 20px;
+  display:grid; grid-template-columns:36px 1fr; gap:14px; align-items:center;
+}
+.room-num{
+  font-family:var(--font-serif); font-size:24px; color:var(--sun-700);
+  line-height:1;
+}
+.room-name{ font-weight:500; color:var(--slate-800); font-size:15px; }
+.room-detail{ font-size:13px; color:var(--slate-500); margin-top:2px; }
+.room-area{ font-family:var(--font-sans); font-size:13px; color:var(--slate-500); font-variant-numeric:tabular-nums; }
+
+@media (max-width:880px){
+  .plan-layout{ grid-template-columns:1fr; gap:32px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 7 · Lage & Umgebung
+   ════════════════════════════════════════════════════════════════ */
+.lage-toggle{
+  display:inline-flex; padding:4px; background:var(--bg-cream);
+  border:0.5px solid var(--slate-200); border-radius:999px;
+  margin:0 auto 40px; gap:2px;
+}
+.lage-toggle button{
+  font:500 13px/1 var(--font-sans); padding:10px 22px;
+  background:transparent; border:none; border-radius:999px;
+  color:var(--slate-500); cursor:pointer;
+  transition:background var(--t-base), color var(--t-base);
+}
+.lage-toggle button.active{ background:var(--slate-800); color:var(--on-dark); }
+.lage-toggle button:hover:not(.active){ color:var(--slate-800); }
+
+.lage-layout{
+  display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:start;
+}
+.map-box{
+  aspect-ratio:1.25/1;
+  border-radius:var(--r-lg); overflow:hidden; position:relative;
+  border:0.5px solid var(--slate-200);
+  background:
+    radial-gradient(circle at 30% 70%, #E6E3D8 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, #DDD9D0 0%, transparent 50%),
+    linear-gradient(135deg, #EAE6DA 0%, #C9C5BA 100%);
+}
+.map-box .pin{
+  position:absolute; top:50%; left:55%;
+  transform:translate(-50%, -100%);
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  z-index:2;
+}
+.map-box .pin-dot{
+  width:18px; height:18px; border-radius:50%;
+  background:var(--sun-500); border:3px solid var(--slate-800);
+  box-shadow:0 2px 6px rgba(28,31,36,0.25);
+}
+.map-box .pin-label{
+  background:var(--slate-800); color:var(--on-dark);
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500;
+  padding:6px 10px; border-radius:var(--r-sm); white-space:nowrap;
+  position:absolute; top:-36px; left:50%; transform:translateX(-50%);
+}
+.map-box .poi{
+  position:absolute; width:10px; height:10px; border-radius:50%;
+  background:var(--bg-white); border:2px solid var(--slate-800);
+}
+.map-box .poi::after{
+  content:attr(data-label);
+  position:absolute; left:14px; top:-4px;
+  font-size:11px; color:var(--slate-700); font-weight:500;
+  white-space:nowrap; background:rgba(250,247,240,0.85);
+  padding:2px 6px; border-radius:var(--r-sm);
+}
+.map-meta{
+  position:absolute; bottom:16px; left:18px; right:18px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--slate-700); font-weight:500;
+}
+
+.poi-list{ list-style:none; padding:0; margin:0; }
+.poi-list li{
+  display:grid; grid-template-columns:1fr auto; gap:16px; align-items:baseline;
+  padding:14px 0; border-bottom:0.5px solid var(--slate-200);
+  font-size:14.5px;
+}
+.poi-list li:last-child{ border-bottom:none; }
+.poi-list .poi-name{ color:var(--slate-800); }
+.poi-list .poi-name small{ display:block; color:var(--slate-500); font-size:12.5px; margin-top:2px; }
+.poi-list .poi-dist{
+  font-family:var(--font-sans); color:var(--sun-700); font-weight:500;
+  font-variant-numeric:tabular-nums; font-size:13px; white-space:nowrap;
+}
+
+.lage-note{
+  margin-top:24px;
+  background:var(--bg-cream);
+  border:0.5px solid var(--slate-200);
+  border-left:3px solid var(--sun-500);
+  border-radius:var(--r-md);
+  padding:14px 18px;
+  font-size:13.5px; color:var(--slate-700);
+}
+.lage-note b{ color:var(--slate-800); font-weight:500; }
+
+@media (max-width:880px){
+  .lage-layout{ grid-template-columns:1fr; gap:32px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 8 · Gastgeber-Story
+   ════════════════════════════════════════════════════════════════ */
+.story{ background:var(--slate-800); color:var(--on-dark); }
+.story h2{ color:var(--on-dark); }
+.story-grid{
+  display:grid; grid-template-columns:1fr 1.1fr; gap:64px; align-items:center;
+}
+.story-portrait{
+  border-radius:var(--r-lg); aspect-ratio:4/5; overflow:hidden;
+  background:
+    linear-gradient(180deg, rgba(28,31,36,0) 55%, rgba(28,31,36,0.65) 100%),
+    url('assets/gastgeber.jpg') center 22% / cover no-repeat;
+  border:0.5px solid rgba(245,242,234,0.12);
+  display:flex; flex-direction:column; justify-content:flex-end;
+  padding:24px; position:relative;
+}
+.story-portrait .portrait-meta{
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--sun-500); font-weight:500; margin-bottom:8px;
+}
+.story-portrait .portrait-label{
+  font-family:var(--font-serif); font-style:italic; font-size:17px;
+  color:var(--on-dark); opacity:.92; line-height:1.4;
+}
+.story-text h2{ margin:18px 0 26px; }
+.story-text p{
+  font-size:16px; line-height:1.8; color:var(--slate-300);
+  margin-bottom:18px; max-width:540px;
+}
+.story-text p em{ font-style:italic; color:var(--on-dark); }
+.story-text p b{ color:var(--on-dark); font-weight:500; }
+
+.book-block{
+  display:grid; grid-template-columns:200px 1fr auto; gap:22px; align-items:center;
+  margin-top:32px;
+  background:rgba(245,242,234,0.06);
+  border:0.5px solid rgba(245,242,234,0.14);
+  border-radius:var(--r-lg);
+  padding:20px 24px;
+  position:relative; overflow:hidden;
+  max-width:620px;
+}
+.book-block::before{
+  content:''; position:absolute; top:0; left:0;
+  width:32px; height:3px; background:var(--sun-500);
+}
+.book-cover{
+  width:200px; aspect-ratio:3/2;
+  border-radius:var(--r-sm); overflow:hidden;
+  border:0.5px solid rgba(245,242,234,0.18);
+  flex:0 0 200px;
+  box-shadow:0 8px 20px -4px rgba(0,0,0,0.4);
+}
+.book-cover img{
+  width:100%; height:100%; object-fit:cover; display:block;
+}
+.book-info .eyebrow{ margin-bottom:4px; color:var(--sun-500); }
+.book-info .book-title{ font-family:var(--font-serif); font-style:italic; font-size:18px; color:var(--on-dark); line-height:1.3; }
+.book-info .book-sub{ font-size:12.5px; color:var(--slate-300); margin-top:2px; }
+.book-block a{ color:var(--sun-500); text-decoration:none; font-size:13px; font-weight:500; display:inline-flex; align-items:center; gap:6px; white-space:nowrap; }
+.book-block a:hover{ color:var(--on-dark); }
+
+@media (max-width:880px){
+  .story-grid{ grid-template-columns:1fr; gap:40px; }
+  .book-block{ grid-template-columns:140px 1fr; }
+  .book-block a{ grid-column:1 / -1; }
+  .book-cover{ width:140px; flex:0 0 140px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 9 · BUCHUNG (Tramino-iFrame + Akkordeon)
+   ════════════════════════════════════════════════════════════════ */
+.booking{ background:var(--bg-cream); }
+.booking .block-header{ margin-bottom:40px; }
+.tramino-frame{
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  position:relative; overflow:hidden;
+  max-width:1080px; margin:0 auto;
+}
+.tramino-frame::before{
+  content:''; position:absolute; top:0; left:0;
+  width:48px; height:3px; background:var(--sun-500); z-index:3;
+}
+.tramino-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 28px; border-bottom:0.5px solid var(--slate-200);
+  gap:12px; flex-wrap:wrap;
+}
+.tramino-header .h-title{
+  font-family:var(--font-serif); font-size:20px; color:var(--slate-800);
+}
+.tramino-header .h-meta{ font-size:12px; color:var(--slate-500); display:inline-flex; align-items:center; gap:6px; }
+.tramino-header .h-meta::before{ content:''; width:6px; height:6px; border-radius:50%; background:var(--success); }
+.tramino-body{
+  padding:32px 28px;
+  display:grid; grid-template-columns:1fr 1fr; gap:32px;
+}
+.cal-wrap{ position:relative; }
+.cal-head{
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:14px;
+}
+.cal-head .cal-title{ font-family:var(--font-serif); font-size:22px; color:var(--slate-800); }
+.cal-head .cal-nav{ display:flex; gap:6px; }
+.cal-head .cal-nav button{
+  width:30px; height:30px; border-radius:50%; border:0.5px solid var(--slate-200);
+  background:var(--bg-white); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  color:var(--slate-700);
+}
+.cal-head .cal-nav button:hover{ background:var(--bg-cream); }
+.cal-grid{
+  display:grid; grid-template-columns:repeat(7, 1fr); gap:2px;
+  font-size:13px;
+}
+.cal-grid .dow{
+  font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--slate-500); text-align:center; padding:6px 0; font-weight:500;
+}
+.cal-grid .d{
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-radius:var(--r-sm); color:var(--slate-700);
+  font-variant-numeric:tabular-nums;
+}
+.cal-grid .d.empty{ visibility:hidden; }
+.cal-grid .d.booked{
+  color:var(--slate-300); text-decoration:line-through;
+  background:var(--bg-cream);
+}
+.cal-grid .d.range{ background:var(--sun-100); color:var(--slate-800); }
+.cal-grid .d.range-edge{ background:var(--sun-500); color:var(--on-sun); font-weight:500; }
+.cal-grid .d.today{ outline:0.5px solid var(--slate-800); }
+.cal-legend{
+  display:flex; gap:18px; margin-top:16px; padding-top:14px;
+  border-top:0.5px solid var(--slate-200);
+  font-size:11.5px; color:var(--slate-500);
+  flex-wrap:wrap;
+}
+.cal-legend span{ display:inline-flex; align-items:center; gap:6px; }
+.cal-legend span::before{
+  content:''; width:10px; height:10px; border-radius:2px;
+}
+.cal-legend .l-free::before{ background:var(--bg-white); border:0.5px solid var(--slate-200); }
+.cal-legend .l-booked::before{ background:var(--bg-cream); }
+.cal-legend .l-select::before{ background:var(--sun-500); }
+
+.booking-form-side{
+  display:grid; gap:14px;
+}
+.booking-form-side .row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.booking-form-side .price-line{
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding:14px 0; border-bottom:0.5px solid var(--slate-200);
+  font-size:14px; color:var(--slate-500);
+}
+.booking-form-side .price-line:first-of-type{ border-top:0.5px solid var(--slate-200); margin-top:6px; }
+.booking-form-side .price-line.total{ border-bottom:none; padding-top:18px; }
+.booking-form-side .price-line.total .label{ color:var(--slate-800); font-weight:500; font-size:15px; }
+.booking-form-side .price-line.total .val{ font-family:var(--font-serif); font-size:28px; color:var(--slate-800); line-height:1; }
+.booking-form-side .price-line .val{ color:var(--slate-800); font-variant-numeric:tabular-nums; }
+.booking-form-side .btn{ width:100%; }
+.booking-form-side .legal{ font-size:11.5px; color:var(--slate-500); line-height:1.5; text-align:center; }
+
+.tramino-foot{
+  padding:16px 28px; border-top:0.5px solid var(--slate-200);
+  font-size:11.5px; letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--slate-500); font-weight:500;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+}
+
+.terms{
+  max-width:1080px; margin:24px auto 0;
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+.terms-row{ border-bottom:0.5px solid var(--slate-200); }
+.terms-row:last-child{ border-bottom:none; }
+.terms-q{
+  display:flex; justify-content:space-between; align-items:center;
+  cursor:pointer; padding:18px 24px; gap:16px;
+  font-family:var(--font-sans); font-weight:500; font-size:14px; color:var(--slate-800);
+}
+.terms-q .chev{ width:18px; height:18px; transition:transform var(--t-base); stroke:var(--slate-500); }
+.terms-row.open .terms-q .chev{ transform:rotate(180deg); stroke:var(--sun-700); }
+.terms-a{ max-height:0; overflow:hidden; transition:max-height var(--t-base); }
+.terms-row.open .terms-a{ max-height:260px; }
+.terms-a-inner{ padding:0 24px 20px; font-size:13.5px; color:var(--slate-500); line-height:1.7; }
+.terms-a-inner b{ color:var(--slate-800); font-weight:500; }
+
+@media (max-width:880px){
+  .tramino-body{ grid-template-columns:1fr; gap:24px; padding:24px 20px; }
+  .tramino-header{ padding:18px 20px; }
+  .tramino-foot{ padding:14px 20px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 10 · Bewertungen
+   ════════════════════════════════════════════════════════════════ */
+.reviews .review-summary{
+  display:flex; align-items:center; justify-content:center; gap:18px;
+  margin:0 0 12px;
+}
+.review-stars{ display:inline-flex; gap:3px; }
+.review-stars svg{ fill:var(--sun-500); stroke:var(--sun-500); width:20px; height:20px; }
+.review-score{
+  font-family:var(--font-serif); font-size:38px; line-height:1; color:var(--slate-800);
+}
+.review-meta{ font-size:13.5px; color:var(--slate-500); }
+.reviews-grid{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:18px;
+  max-width:1000px; margin:0 auto;
+}
+.review-card{
+  background:var(--bg-white);
+  border:0.5px solid var(--slate-200);
+  border-radius:var(--r-lg);
+  padding:28px 28px 24px; position:relative; overflow:hidden;
+}
+.review-card::before{
+  content:''; position:absolute; top:0; left:0;
+  width:32px; height:3px; background:var(--sun-500);
+}
+.review-card .r-stars{ display:inline-flex; gap:2px; margin-bottom:14px; }
+.review-card .r-stars svg{ width:14px; height:14px; fill:var(--sun-500); stroke:var(--sun-500); }
+.review-card .review-quote{
+  font-family:var(--font-serif); font-style:italic;
+  font-size:19px; line-height:1.5; color:var(--slate-800);
+  margin:0 0 18px;
+}
+.review-card .review-author{
+  font-size:13px; color:var(--slate-500); margin:0;
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+}
+.review-card .review-author b{ color:var(--slate-800); font-weight:500; }
+@media (max-width:760px){ .reviews-grid{ grid-template-columns:1fr; } }
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 11 · FAQ
+   ════════════════════════════════════════════════════════════════ */
+.faq{ background:var(--bg-cream); }
+.faq-list{ max-width:780px; margin:0 auto; }
+.faq-item{
+  border-bottom:0.5px solid var(--slate-200);
+  padding:24px 0;
+}
+.faq-item:first-child{ border-top:0.5px solid var(--slate-200); }
+.faq-q{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  cursor:pointer; gap:24px;
+  font-family:var(--font-serif); font-size:22px; color:var(--slate-800);
+  line-height:1.35;
+}
+.faq-q .chev{
+  width:22px; height:22px; flex:0 0 22px;
+  transition:transform var(--t-base); stroke:var(--slate-500);
+  margin-top:6px;
+}
+.faq-item.open .chev{ transform:rotate(180deg); stroke:var(--sun-700); }
+.faq-a{
+  max-height:0; overflow:hidden; transition:max-height var(--t-base);
+  font-size:15px; color:var(--slate-700); line-height:1.75;
+}
+.faq-item.open .faq-a{ max-height:240px; padding-top:14px; }
+.faq-a p{ max-width:680px; }
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 12 · Anfahrt & Kontakt
+   ════════════════════════════════════════════════════════════════ */
+.kontakt-layout{
+  display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:start;
+}
+.kontakt-map{
+  aspect-ratio:1.4/1; border-radius:var(--r-lg); overflow:hidden; position:relative;
+  background:#e7e3d8;
+  border:0.5px solid var(--slate-200);
+}
+.kontakt-map iframe{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  border:0; display:block;
+  filter:saturate(0.92) contrast(1.02);
+}
+.kontakt-map .map-addr{
+  position:absolute; bottom:14px; left:14px;
+  font-family:var(--font-serif); font-style:italic;
+  font-size:14px; color:var(--slate-800);
+  background:rgba(255,255,255,0.92);
+  padding:8px 12px; border-radius:var(--r-sm);
+  box-shadow:0 4px 14px rgba(28,31,36,0.12);
+  backdrop-filter:blur(6px);
+  z-index:2;
+}
+.kontakt-map .map-link{
+  position:absolute; top:14px; right:14px;
+  font-family:var(--font-sans); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500;
+  color:var(--slate-800); text-decoration:none;
+  background:rgba(255,255,255,0.92);
+  padding:8px 12px; border-radius:var(--r-sm);
+  box-shadow:0 4px 14px rgba(28,31,36,0.12);
+  z-index:2;
+  display:inline-flex; align-items:center; gap:6px;
+  transition:background var(--t-base);
+}
+.kontakt-map .map-link:hover{ background:#fff; }
+.kontakt-map .map-link svg{ width:14px; height:14px; }
+
+.kontakt-info dl{ margin:0; }
+.kontakt-info dt{
+  font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--sun-700); font-weight:500; margin-top:18px;
+}
+.kontakt-info dt:first-child{ margin-top:0; }
+.kontakt-info dd{
+  margin:6px 0 0; font-size:15px; color:var(--slate-800); line-height:1.65;
+}
+.kontakt-info dd a{ color:var(--slate-800); text-decoration:none; border-bottom:0.5px solid var(--slate-200); }
+.kontakt-info dd a:hover{ color:var(--sun-700); border-color:var(--sun-500); }
+
+.kontakt-actions{ display:flex; gap:10px; margin-top:24px; flex-wrap:wrap; }
+.kontakt-actions .btn{ flex:1 1 auto; }
+
+.kontakt-winter{
+  margin-top:32px;
+  background:var(--bg-cream);
+  border:0.5px solid var(--slate-200);
+  border-left:3px solid var(--sun-500);
+  border-radius:var(--r-md);
+  padding:16px 18px;
+  font-size:13.5px; color:var(--slate-700); line-height:1.6;
+}
+.kontakt-winter b{ color:var(--slate-800); font-weight:500; display:block; margin-bottom:4px; }
+
+@media (max-width:880px){
+  .kontakt-layout{ grid-template-columns:1fr; gap:32px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SEKTION 13 · Footer
+   ════════════════════════════════════════════════════════════════ */
+.footer{
+  background:var(--slate-900); color:var(--slate-300);
+  padding:64px 0 32px;
+}
+.footer-grid{
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:40px;
+  margin-bottom:48px;
+}
+.footer .brand{ color:var(--on-dark); margin-bottom:18px; }
+.footer .brand .brand-name{ color:var(--on-dark); font-size:22px; }
+.footer .brand-logo.footer-logo{
+  height:80px;
+  filter:brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+  opacity:0.9;
+}
+.footer p.about{ font-size:13.5px; line-height:1.7; color:var(--slate-300); max-width:340px; }
+.footer-social{ display:flex; gap:10px; margin-top:18px; }
+.footer-social a{
+  width:34px; height:34px; border-radius:50%;
+  border:0.5px solid rgba(245,242,234,0.18);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--slate-300);
+  transition:background var(--t-fast), color var(--t-fast);
+}
+.footer-social a:hover{ background:var(--sun-500); color:var(--on-sun); border-color:var(--sun-500); }
+.footer-social a svg{ width:16px; height:16px; }
+
+.footer h4{ color:var(--on-dark); font-size:11px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:18px; }
+.footer ul{ list-style:none; padding:0; margin:0; }
+.footer ul li{ margin-bottom:10px; }
+.footer ul li a{ color:var(--slate-300); text-decoration:none; font-size:13.5px; }
+.footer ul li a:hover{ color:var(--sun-500); }
+.footer-base{
+  border-top:0.5px solid rgba(245,242,234,0.12);
+  padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center; gap:16px;
+  font-size:12px; color:var(--slate-500);
+  flex-wrap:wrap;
+}
+.hd-badge{
+  display:inline-flex; align-items:center; gap:8px; font-size:11px;
+  letter-spacing:0.22em; text-transform:uppercase; color:var(--slate-300); font-weight:500;
+}
+.hd-badge::before{ content:''; width:24px; height:3px; background:var(--sun-500); }
+@media (max-width:880px){
+  .footer-grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:560px){
+  .footer-grid{ grid-template-columns:1fr; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Sticky-CTA (Mobile only)
+   ════════════════════════════════════════════════════════════════ */
+.sticky-cta{
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; z-index:60;
+  background:rgba(250,247,240,0.96);
+  border-top:0.5px solid var(--slate-200);
+  padding:12px 16px env(safe-area-inset-bottom, 12px);
+  align-items:center; justify-content:space-between; gap:12px;
+}
+.sticky-cta .price{ font-family:var(--font-serif); font-size:18px; color:var(--slate-800); line-height:1.2; }
+.sticky-cta .price small{ display:block; font-family:var(--font-sans); font-size:11px; color:var(--slate-500); letter-spacing:0.18em; text-transform:uppercase; font-weight:500; margin-top:2px; }
+.sticky-cta .btn{ padding:12px 18px; font-size:13px; }
+@media (max-width:760px){
+  .sticky-cta{ display:flex; }
+  body{ padding-bottom:78px; }
+}
+
+/* ── Lightbox ──────────────────────────────────────────────────────── */
+.lightbox{
+  position:fixed; inset:0; z-index:100;
+  background:rgba(15,17,21,0.94);
+  display:none; align-items:center; justify-content:center;
+  padding:24px;
+  opacity:0; transition:opacity 220ms ease;
+  -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+}
+.lightbox.open{ display:flex; opacity:1; }
+.lb-stage{
+  position:relative; max-width:min(1280px, 95vw); max-height:88vh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; width:100%;
+}
+.lb-img{
+  max-width:100%; max-height:78vh; width:auto; height:auto;
+  display:block;
+  border-radius:var(--r-lg);
+  background:#0f1115;
+  box-shadow:0 30px 80px -20px rgba(0,0,0,0.6);
+  object-fit:contain;
+}
+.lb-caption{
+  display:flex; align-items:baseline; justify-content:center; gap:14px;
+  flex-wrap:wrap; text-align:center;
+  color:var(--slate-300); font-size:14px;
+  max-width:780px;
+}
+.lb-caption .lb-meta{
+  font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--sun-500); font-weight:500;
+}
+.lb-caption .lb-label{
+  font-family:var(--font-serif); font-style:italic; color:var(--on-dark);
+  font-size:18px;
+}
+.lb-counter{
+  position:absolute; top:-40px; left:0;
+  font-size:11px; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--slate-300); font-weight:500;
+  font-variant-numeric:tabular-nums;
+}
+.lb-btn{
+  position:absolute; z-index:2;
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(245,242,234,0.08);
+  border:0.5px solid rgba(245,242,234,0.20);
+  color:var(--on-dark); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.lb-btn:hover{ background:rgba(232,180,82,0.18); border-color:var(--sun-500); color:var(--sun-500); }
+.lb-btn svg{ width:22px; height:22px; stroke-width:1.5; }
+.lb-close{ top:24px; right:24px; }
+.lb-prev{ left:24px; top:50%; transform:translateY(-50%); }
+.lb-next{ right:24px; top:50%; transform:translateY(-50%); }
+.lb-prev:hover{ transform:translateY(-50%) translateX(-2px); }
+.lb-next:hover{ transform:translateY(-50%) translateX(2px); }
+body.lb-locked{ overflow:hidden; }
+.gallery-tile{ cursor:zoom-in; }
+@media (max-width:720px){
+  .lightbox{ padding:14px; }
+  .lb-btn{ width:40px; height:40px; }
+  .lb-close{ top:14px; right:14px; }
+  .lb-prev{ left:8px; }
+  .lb-next{ right:8px; }
+  .lb-img{ max-height:70vh; }
+  .lb-counter{ top:-32px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE OVERRIDES
+   ════════════════════════════════════════════════════════════════ */
+
+/* Tablet / small laptop down */
+@media (max-width:760px){
+  .container{ padding:0 20px; }
+  .nav-inner{ padding:12px 20px; gap:14px; }
+  .nav-cta{ padding:10px 14px; font-size:12px; letter-spacing:0.04em; }
+
+  /* Hero scaling */
+  .hero{ padding:108px 0 56px; min-height:auto; }
+  .hero .eyebrow-wrap{ margin-bottom:20px; }
+  .hero h1{ font-size:38px; margin:0 0 22px; line-height:1.05; }
+  .hero .lead{ font-size:15.5px; margin-bottom:28px; line-height:1.55; }
+  .hero .sub{ gap:10px 14px; font-size:12.5px; margin-bottom:28px; }
+  .hero .sub .dot{ display:none; }
+  .cta-group{ gap:10px; margin-bottom:32px; }
+  .cta-group .btn{ flex:1 1 auto; min-width:140px; justify-content:center; }
+
+  /* Anchor (Verfügbarkeit prüfen) */
+  .anchor{ padding:20px 18px; }
+  .anchor-meta .anchor-title{ font-size:19px; }
+  .anchor-meta .anchor-sub{ font-size:12.5px; gap:8px 10px; }
+
+  /* Section base — already 64px padding from 768 breakpoint */
+  .block-header h2{ font-size:30px; }
+  .block-header p{ font-size:15.5px; }
+
+  /* USP cards */
+  .usp-card{ padding:24px 22px; }
+
+  /* Teaser */
+  .teaser-inner h2{ font-size:30px; }
+  .teaser p:last-child{ font-size:18px; margin-top:24px; }
+
+  /* Gallery — feature tile shorter, padding smaller */
+  .gallery{ grid-template-rows:260px 220px 220px 220px; gap:10px; }
+  .gallery-tile{ padding:18px; }
+  .gallery-tile .tile-label{ font-size:14px; }
+  .gallery-tile.feature .tile-label{ font-size:16px; }
+
+  /* Highlights card */
+  .highlights{ padding:24px 20px; margin-top:24px; }
+  .highlights .h-head{ margin-bottom:18px; }
+
+  /* Seasons (Sommer/Winter thumbs) */
+  .season-head{ flex-wrap:wrap; gap:8px 12px; }
+  .season-head .s-title{ font-size:18px; }
+
+  /* Plan / Rooms */
+  .room{ padding:16px 18px; gap:12px; }
+  .room-num{ font-size:20px; }
+  .room-name{ font-size:14.5px; }
+  .room-detail{ font-size:12.5px; }
+  .plan-caption{ position:static; margin-top:14px; }
+
+  /* Lage */
+  .lage-toggle{ margin-bottom:28px; }
+  .map-box{ aspect-ratio:1/1; }
+  .poi-list li{ padding:12px 0; font-size:14px; gap:12px; }
+
+  /* Story / Gastgeber */
+  .story-portrait{ aspect-ratio:4/5; }
+  .book-block{ padding:18px; gap:14px; }
+  .book-info .book-title{ font-size:16px; }
+  .book-info .book-sub{ font-size:12px; }
+
+  /* Booking (Tramino) */
+  .tramino-header{ flex-direction:column; align-items:flex-start; gap:6px; }
+  .tramino-body{ padding:20px 16px; }
+  .cal-head{ font-size:14px; }
+  .cal-grid .d{ padding:8px 0; font-size:12.5px; }
+  .booking-form-side .row{ grid-template-columns:1fr; }
+  .booking-form-side{ gap:12px; }
+  .tramino-foot{ padding:12px 16px; flex-direction:column; align-items:flex-start; gap:8px; }
+
+  /* Reviews */
+  .review-card{ padding:22px 20px; }
+  .reviews-grid{ gap:14px; }
+
+  /* FAQ */
+  .faq-item{ padding:20px 0; }
+  .faq-item .faq-q{ padding:0; font-size:18px; gap:18px; }
+  .faq-q .chev{ width:20px; height:20px; flex:0 0 20px; margin-top:4px; }
+  .faq-a{ font-size:15px; line-height:1.65; }
+  .faq-a p{ font-size:15px; line-height:1.65; }
+
+  /* Kontakt map */
+  .kontakt-map{ aspect-ratio:1.2/1; }
+  .kontakt-map .map-link{ font-size:10px; padding:6px 10px; top:10px; right:10px; }
+  .kontakt-map .map-addr{ font-size:12.5px; padding:6px 10px; bottom:10px; left:10px; max-width:calc(100% - 20px); }
+  .kontakt-info dt{ margin-top:16px; font-size:10.5px; }
+  .kontakt-info dd{ font-size:14.5px; }
+  .kontakt-actions{ gap:8px; }
+  .kontakt-actions .btn{ flex:1 1 100%; }
+
+  /* Footer */
+  .footer{ padding:48px 0 32px; }
+  .footer-grid{ gap:32px; margin-bottom:32px; }
+}
+
+/* Phone */
+@media (max-width:480px){
+  .container{ padding:0 16px; }
+  .nav-inner{ padding:10px 16px; gap:10px; }
+  .brand-logo{ height:44px; }
+  .nav-cta{ padding:9px 12px; font-size:11.5px; }
+
+  /* Hero */
+  .hero{ padding:96px 0 48px; }
+  .hero h1{ font-size:32px; }
+  .hero .lead{ font-size:15px; margin-bottom:24px; }
+  .hero .sub{ font-size:12px; }
+  .trust-block{ grid-template-columns:1fr 1fr; padding:16px 16px; gap:14px 16px; }
+  .trust-cell .trust-value{ font-size:15.5px; }
+  .trust-cell .trust-label{ font-size:9px; letter-spacing:0.18em; }
+
+  /* Section base */
+  section.block{ padding:56px 0; }
+  h1{ font-size:34px; }
+  h2{ font-size:26px; line-height:1.15; }
+  h3{ font-size:20px; }
+  .block-header{ margin-bottom:32px; }
+  .block-header h2{ font-size:26px; }
+
+  /* Anchor */
+  .anchor-grid{ grid-template-columns:1fr; gap:14px; }
+  .anchor .btn{ width:100%; }
+
+  /* Teaser */
+  .teaser-inner h2{ font-size:26px; }
+  .teaser p:last-child{ font-size:16.5px; }
+
+  /* Gallery — collapse to single column, auto-height */
+  .gallery{
+    grid-template-columns:1fr;
+    grid-template-rows:none;
+    grid-auto-rows:240px;
+    gap:10px;
+  }
+  .gallery-tile.feature{
+    grid-column:auto; grid-row:auto;
+    grid-row:span 1;
+  }
+  .gallery-tile.feature .tile-label{ font-size:15px; }
+
+  /* Highlights ul already 1col at <560 */
+  .highlights{ padding:22px 18px; }
+  .highlights h3{ font-size:19px; }
+
+  /* Seasons */
+  .thumb-grid{ gap:8px; }
+
+  /* Story */
+  .book-block{ grid-template-columns:1fr; gap:12px; }
+  .book-cover{ width:100%; max-width:160px; flex:none; }
+
+  /* Buchung */
+  .anchor::before, .tramino-frame::before{ width:36px; }
+
+  /* Reviews */
+  .reviews-head{ flex-direction:column; align-items:flex-start; gap:12px; margin-bottom:28px; }
+
+  /* Sticky CTA — tighten */
+  .sticky-cta{ padding:10px 14px; gap:10px; }
+  .sticky-cta .price{ font-size:14px; }
+  .sticky-cta .btn{ padding:11px 16px; font-size:12.5px; }
+
+  /* Footer */
+  .footer-grid{ grid-template-columns:1fr; gap:28px; }
+  .footer-col h4{ font-size:13px; }
+  .footer-col li{ font-size:13.5px; }
+
+  /* FAQ headings */
+  .faq-item .faq-q{ font-size:17px; gap:14px; }
+
+  /* Lightbox */
+  .lb-counter{ font-size:10px; }
+}
+
+/* Very narrow (small phones) */
+@media (max-width:360px){
+  .hero h1{ font-size:28px; }
+  .nav-cta{ padding:8px 10px; font-size:11px; letter-spacing:0.02em; }
+  .brand-logo{ height:40px; }
+  .trust-block{ grid-template-columns:1fr; gap:12px; }
+  .cta-group .btn{ width:100%; flex:1 1 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════ NAV -->
+<nav class="nav" data-screen-label="00 Nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Ferienwohnung Hirschsprung – Startseite">
+      <img src="assets/logo.png" alt="" class="brand-logo" width="400" height="300">
+      <span class="sr-only">Ferienwohnung Hirschsprung</span>
+    </a>
+    <div class="nav-links">
+      <a href="#wohnung">Wohnung</a>
+      <a href="#lage">Lage</a>
+      <a href="#gastgeber">Gastgeber</a>
+      <a href="#bewertungen">Bewertungen</a>
+      <a href="#buchung" class="btn btn-primary nav-cta">Jetzt buchen</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- ════════════════════════════════════════════════════════════ 1 · HERO -->
+<header class="hero-wrap" data-screen-label="01 Hero">
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="eyebrow-wrap">
+          <p class="eyebrow eyebrow--on-dark">Ferienwohnung Hirschsprung · Obermaiselstein</p>
+        </div>
+        <h1>Drei Berge.<br>Ein Holzhaus.<br>Ihre Auszeit.</h1>
+        <p class="lead">
+          Ein neues Holzhaus zwischen Tiefenbach und Obermaiselstein, gebaut mit
+          Materialien aus der Region. 88 m² für 1 bis 4 Personen, mit Süd-Balkon
+          und freiem Blick auf das Allgäuer Dreigestirn.
+        </p>
+
+        <p class="sub">
+          <span><b>Neue moderne Ferienwohnung</b></span>
+          <span class="dot"></span>
+          <span><span style="color: rgb(255, 255, 255);">Wandern und Biken ab Haus</span></span>
+          <span class="dot"></span>
+          <span><span style="color: rgb(255, 255, 255);"><b>5,0 / 5,0</b> bei 25 Gästen</span></span>
+        </p>
+
+        <div class="cta-group">
+          <a href="#buchung" class="btn btn-primary btn-lg">Jetzt buchen</a>
+          <a href="#wohnung" class="btn btn-secondary-dark btn-lg">Wohnung ansehen</a>
+        </div>
+
+        <div class="trust-block">
+          <div class="trust-cell">
+            <p class="trust-label">DTV</p>
+            <p class="trust-value">5 Sterne</p>
+          </div>
+          <div class="trust-cell">
+            <p class="trust-label">WOHNFLÄCHE</p>
+            <p class="trust-value">88 m²</p>
+          </div>
+          <div class="trust-cell">
+            <p class="trust-label">PERSONEN</p>
+            <p class="trust-value">1 - 4</p>
+          </div>
+          <div class="trust-cell">
+            <p class="trust-label">AUSSICHT</p>
+            <p class="trust-value">Süd-Balkon</p>
+          </div>
+        </div>
+      </div>
+
+      <span class="hero-photo-label">AUSSENANSICHT FERIENWOHNUNG HIRSCHSPRUNG</span>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════ 2 · USPs -->
+<section class="block" id="wohnung" data-screen-label="02 USPs">
+  <div class="container">
+    <div class="emblem" aria-hidden="true">
+      <svg class="emblem-ring" viewBox="0 0 100 100">
+        <circle class="track" cx="50" cy="50" r="49"/>
+        <circle class="progress" cx="50" cy="50" r="49"
+                stroke-dasharray="307.876" stroke-dashoffset="307.876"/>
+      </svg>
+      <img src="assets/logo.png" alt="">
+    </div>
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Drei gute Gründe</p></div>
+      <h2>Warum Hirschsprung.</h2>
+      <p>Neues Holzhaus in herrlicher Lage. Was Sie hier finden — und was Sie nirgendwo sonst so finden.</p>
+    </div>
+
+    <div class="usp-grid">
+      <article class="usp-card">
+        <div class="usp-icon"><i data-lucide="home"></i></div>
+        <h3>Holzhaus aus regionalen Materialien</h3>
+        <p>Nach alter Bauweise mit regionalen Materialien gefertigt, mit offenem Dachstuhl in allen Räumen und Eichendielen auf dem Boden. Patrick und Jasmin haben an jedem Gewerk selbst Hand angelegt.</p>
+      </article>
+      <article class="usp-card">
+        <div class="usp-icon"><i data-lucide="mountain"></i></div>
+        <h3>Süd-Balkon mit Dreigestirn-Blick</h3>
+        <p>Trettachspitze, Mädelegabel, Hochfrottspitze — und das Söllereck dazu. Vom Frühstückstisch bis zum Abendrot schauen Sie vom Balkon aus zu.</p>
+      </article>
+      <article class="usp-card">
+        <div class="usp-icon"><i data-lucide="footprints"></i></div>
+        <h3>Berge beginnen an der Haustür</h3>
+        <p>Wandern und Biken ab Haus. Loipe in 5 Minuten zu Fuß. Skigebiete Nebelhorn 8 Kilometern Entfernung. Bushaltestelle direkt vor der Tür. Ihr Auto parkt im Carport.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 3 · TEASER -->
+<section class="block teaser" data-screen-label="03 Teaser">
+  <div class="container">
+    <div class="teaser-inner">
+      <div class="eyebrow-wrap"><p class="eyebrow">ALLES WAS SIE BRAUCHEN</p></div>
+      <h2>Ankommen &amp; Wohlfühlen</h2>
+      <p>Helle Eichendielen, offener Dachstuhl, Fußbodenheizung in jedem Raum. Im Wohnraum steht eine Kaffeemaschine — Siebträger- und Filtermaschine in einem. Vom Balkon genießen Sie den Blick auf das gewaltige Allgäuer Dreigestirn. Vor der Haustür beginnen wunderschöne Wanderwege ins Lochbachtal und Rohrmoostal.</p>
+      <p>88 m² gür ein geräumiges Wohnen mit 2 Bädern und 2 Schlafzimmern.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 4 · CONVERSION-ANKER -->
+<section class="anchor-wrap" data-screen-label="04 Conversion-Anker">
+  <div class="container">
+    <div class="anchor">
+      <div class="anchor-grid">
+        <div class="anchor-meta">
+          <p class="eyebrow">ZEITRAUM WÄHLEN &amp; BUCHEN</p>
+          <p class="anchor-title">Verfügbarkeit prüfen.</p>
+          <p class="anchor-sub">
+            <span class="star">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+              <b>5,0</b> bei 25 Gästen
+            </span>
+            <span>·</span>
+            <span><b>5 Sterne DTV</b></span>
+          </p>
+        </div>
+        <div class="field">
+          <label for="a-date-in">Anreise</label>
+          <input id="a-date-in" type="text" value="14. Juni 2026" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="a-date-out">Abreise</label>
+          <input id="a-date-out" type="text" value="21. Juni 2026" autocomplete="off">
+        </div>
+        <a href="#buchung" class="btn btn-primary">
+          <i data-lucide="arrow-down"></i>
+          Zum Buchen
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 5 · DIE WOHNUNG · Galerie + Highlights -->
+<section class="block" data-screen-label="05 Wohnung">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Die Wohnung</p></div>
+      <h2>88 m². Zwei Schlafzimmer. Drei Bäder.</h2>
+      <p>Offener Dachstuhl in allen Räumen. Eichendielen auf dem Boden. Möbel von Schreinerhand. Hier ein einige Impressionen.</p>
+    </div>
+
+    <div class="wohnung-layout">
+      <div class="gallery" id="galerie">
+        <div class="gallery-tile feature t1" data-img="assets/gallery-wohnraum.jpg" data-label="Wohnraum" data-caption="Offener Wohn- und Essbereich mit Zugang zum Süd-Balkon.">
+          <p class="tile-meta">01 · Wohnraum</p>
+          <p class="tile-label">Offener Wohn- und Essbereich mit Zugang zum Süd-Balkon.</p>
+        </div>
+        <div class="gallery-tile t2" data-img="assets/gallery-balkon.jpg" data-label="Süd-Balkon" data-caption="Blick auf Trettachspitze, Mädelegabel und Hochfrottspitze.">
+          <p class="tile-meta">02 · Süd-Balkon</p>
+          <p class="tile-label">Blick auf Trettachspitze, Mädelegabel und Hochfrottspitze.</p>
+        </div>
+        <div class="gallery-tile t3" data-img="assets/gallery-kueche.jpg" data-label="Küche" data-caption="Alles was Sie zum Kochen benötigen.">
+          <p class="tile-meta">03 · Küche</p>
+          <p class="tile-label">Alles was Sie zum Kochen benötigen.</p>
+        </div>
+        <div class="gallery-tile t4" data-img="assets/gallery-schlafzimmer.jpg" data-label="Schlafzimmer" data-caption="Doppelbett, Allergikerbettwäsche, 200 x 200 cm.">
+          <p class="tile-meta">04 · Schlafzimmer</p>
+          <p class="tile-label">Doppelbett, Allergikerbettwäsche, Bettdecken-Überlänge.</p>
+        </div>
+        <div class="gallery-tile t5" data-img="assets/gallery-bad.jpg" data-label="Bad" data-caption="Geräumiges Bad mit Regendusche.">
+          <p class="tile-meta">05 · Bad</p>
+          <p class="tile-label">Geräumiges Bad mit Regendusche.</p>
+        </div>
+        <div class="gallery-tile t6" data-img="assets/gallery-sofa.jpg" data-label="Großes Sofa" data-caption="Großzügige Cord-Couch zum Lesen, Filme schauen und Füße hochlegen.">
+          <p class="tile-meta">06 · Großes Sofa</p>
+          <p class="tile-label">Großzügige Cord-Couch zum Lesen, Filme schauen und Füße hochlegen.</p>
+        </div>
+      </div>
+
+      <aside class="highlights">
+        <div class="h-head">
+          <p class="eyebrow">Auf einen Blick</p>
+          <h3>Alles was Sie brauchen.</h3>
+        </div>
+        <ul>
+          <li><i data-lucide="home"></i><span>88 m² · 5 Räume · 1. OG mit offenem Dachstuhl</span></li>
+          <li><i data-lucide="bed-double"></i><span>2 Schlafzimmer · je Doppelbett mit Bettdecken-Überlänge</span></li>
+          <li><i data-lucide="shower-head"></i><span>2 Bäder + 1 extra WC · 2 Regenduschen</span></li>
+          <li><i data-lucide="chef-hat"></i><span>Wohnraumküche · Filter- &amp; Siebträger-Maschine in einem</span></li>
+          <li><i data-lucide="wifi"></i><span>WLAN im ganzen Haus · Smart-TV mit Netflix</span></li>
+          <li><i data-lucide="thermometer-sun"></i><span>Fußbodenheizung in jedem Raum</span></li>
+          <li><i data-lucide="leaf"></i><span>Allergikerbettwäsche · hypoallergen</span></li>
+          <li><i data-lucide="car"></i><span>Carport am Haus · Abstellraum für Ski &amp; Fahrrad</span></li>
+        </ul>
+      </aside>
+
+      <!-- Saison-Galerien · Sommer & Winter (Thumbnails, anklickbar) -->
+      <div class="seasons" aria-label="Bildimpressionen Sommer und Winter">
+        <div class="season-row">
+          <div class="season-head">
+            <p class="eyebrow">Sommer</p>
+            <span class="s-title">Frischer Wiesenduft mit Blick in die Hochalpen.</span>
+          </div>
+          <div class="thumb-grid">
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-01-haus-fruehling.jpg" data-label="Frühling auf der Wiese" data-caption="Das Haus im ersten Sonnenlicht — Löwenzahn auf der Wiese, frisches Grün am Berg." style="background-image:url('assets/sommer-01-haus-fruehling.jpg')"><span class="thumb-num">01</span><span class="thumb-label">Frühling auf der Wiese</span></div>
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-02-haus-herbstlaub.jpg" data-label="Goldener Herbst" data-caption="Indian Summer im Tal — das Haus zwischen Buchen und Ahorn." style="background-image:url('assets/sommer-02-haus-herbstlaub.jpg')"><span class="thumb-num">02</span><span class="thumb-label">Goldener Herbst</span></div>
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-03-balkon-detail.jpg" data-label="Schindel &amp; Geweih" data-caption="Geschnitzte Balken, Schindelfassade, Hirschgeweih — Detail am Süd-Balkon." style="background-image:url('assets/sommer-03-balkon-detail.jpg')"><span class="thumb-num">03</span><span class="thumb-label">Schindel &amp; Geweih</span></div>
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-04-hausfront.jpg" data-label="Hausfront im Sommer" data-caption="Südseite mit Bank und Holzstoß — die Sonne steht hoch, der Tag fängt gerade an." style="background-image:url('assets/sommer-04-hausfront.jpg')"><span class="thumb-num">04</span><span class="thumb-label">Hausfront im Sommer</span></div>
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-05-petunien.jpg" data-label="Sommerblumen" data-caption="Petunien und Geranien in alten Milchkannen vor der Holzwand." style="background-image:url('assets/sommer-05-petunien.jpg')"><span class="thumb-num">05</span><span class="thumb-label">Sommerblumen</span></div>
+            <div class="thumb" data-group="sommer" data-img="assets/sommer-06-bergblick.jpg" data-label="Blick auf die Allgäuer Alpen" data-caption="Durchblick zwischen den Bäumen auf den verschneiten Hauptkamm." style="background-image:url('assets/sommer-06-bergblick.jpg')"><span class="thumb-num">06</span><span class="thumb-label">Blick auf die Alpen</span></div>
+          </div>
+        </div>
+
+        <div class="season-row">
+          <div class="season-head">
+            <p class="eyebrow">Winter</p>
+            <span class="s-title">Winterglanz mit Loipe vor der Tür.</span>
+          </div>
+          <div class="thumb-grid">
+            <div class="thumb" data-group="winter" data-img="assets/winter-01-haus-verschneit.jpg" data-label="Tiefverschneit" data-caption="Das Haus im Tiefschnee — Raureif im Bergwald, klarer blauer Himmel." style="background-image:url('assets/winter-01-haus-verschneit.jpg')"><span class="thumb-num">01</span><span class="thumb-label">Tiefverschneit</span></div>
+            <div class="thumb" data-group="winter" data-img="assets/winter-02-haus-abendlicht.jpg" data-label="Wintermorgen am Haus" data-caption="Erste Sonnenstrahlen über dem verschneiten Tal — der Tag fängt an." style="background-image:url('assets/winter-02-haus-abendlicht.jpg')"><span class="thumb-num">02</span><span class="thumb-label">Wintermorgen am Haus</span></div>
+            <div class="thumb" data-group="winter" data-img="assets/winter-03-bergblick-frost.jpg" data-label="Raureif &amp; Bergblick" data-caption="Bergblick auf den Hauptkamm durch eisbedeckte Bäume." style="background-image:url('assets/winter-03-bergblick-frost.jpg')"><span class="thumb-num">03</span><span class="thumb-label">Raureif &amp; Bergblick</span></div>
+            <div class="thumb" data-group="winter" data-img="assets/winter-04-loipe.jpg" data-label="Loipe am Hang" data-caption="Frisch gespurte Loipe am Waldrand — direkt ab Haus." style="background-image:url('assets/winter-04-loipe.jpg')"><span class="thumb-num">04</span><span class="thumb-label">Loipe am Hang</span></div>
+            <div class="thumb" data-group="winter" data-img="assets/winter-05-haus-ecke-sonne.jpg" data-label="Sonne im Schnee" data-caption="Blick aus der Hausecke — Wintersonne über unberührtem Schnee." style="background-image:url('assets/winter-05-haus-ecke-sonne.jpg')"><span class="thumb-num">05</span><span class="thumb-label">Sonne im Schnee</span></div>
+            <div class="thumb" data-group="winter" data-img="assets/winter-06-glocken-schmuck.jpg" data-label="Kuhglocken am Dach" data-caption="Geschmückte Schindelfassade mit Kuhglocken — Brauchtum am Allgäuer Holzhaus." style="background-image:url('assets/winter-06-glocken-schmuck.jpg')"><span class="thumb-num">06</span><span class="thumb-label">Kuhglocken am Dach</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 6 · GRUNDRISS -->
+<section class="block plan" data-screen-label="06 Grundriss">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Grundriss</p></div>
+      <h2>So liegt es zusammen.</h2>
+      <p>1. OG, Dachwohnung. Wohnraum nach Süden mit Balkon, Schlafzimmer ruhig
+         an der Rückseite.</p>
+    </div>
+
+    <div class="plan-layout">
+      <div class="plan-svg-wrap">
+        <img src="assets/grundriss.png" alt="Grundriss der Ferienwohnung Hirschsprung — Wohnraum mit Küche, zwei Schlafzimmer, zwei Bäder, Süd-Balkon" class="plan-img">
+
+        <div class="plan-caption">
+          <p class="cap-meta">Grundriss · Maßstabsgetreu</p>
+          <p class="cap-area">88 m²</p>
+        </div>
+      </div>
+
+      <div class="rooms">
+        <div class="room">
+          <span class="room-num">01</span>
+          <div>
+            <div class="room-name">Wohnraum mit Küche</div>
+            <div class="room-detail">Esstisch mit Aussicht · Sofa · Filter- und Siebträger-Kaffeemaschine</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">02</span>
+          <div>
+            <div class="room-name">Schlafzimmer I</div>
+            <div class="room-detail">Doppelbett · Überlängen-Bettdecken · Hypoallergen · Smart-TV</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">03</span>
+          <div>
+            <div class="room-name">Schlafzimmer II</div>
+            <div class="room-detail">Doppelbett · Überlängen-Bettdecken · Hypoallergen · Smart-TV</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">04</span>
+          <div>
+            <div class="room-name">Badezimmer I</div>
+            <div class="room-detail">WC · Regendusche · Haarföhn · Fußbodenheizung</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">05</span>
+          <div>
+            <div class="room-name">Badezimmer II</div>
+            <div class="room-detail">WC · Regendusche · Haarföhn · Fußbodenheizung</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">06</span>
+          <div>
+            <div class="room-name">Badezimmer III</div>
+            <div class="room-detail">WC · Haarföhn · Fußbodenheizung</div>
+          </div>
+        </div>
+        <div class="room">
+          <span class="room-num">07</span>
+          <div>
+            <div class="room-name">Süd-Balkon</div>
+            <div class="room-detail">Blick auf das Allgäuer Dreigestirn und auf den großen Garten </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 6b · DAS HAUS · Architektur -->
+<style>
+  .haus-architektur{
+    background:var(--slate-900);
+    color:var(--on-dark);
+    position:relative;
+    overflow:hidden;
+  }
+  .haus-architektur::before{
+    content:''; position:absolute; inset:0;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(232,180,82,0.10) 0%, transparent 45%),
+      radial-gradient(circle at 90% 100%, rgba(232,180,82,0.06) 0%, transparent 55%);
+    pointer-events:none;
+  }
+  .haus-architektur .container{ position:relative; z-index:1; }
+  .haus-architektur .block-header{ max-width:760px; }
+  .haus-architektur .block-header h2{ color:var(--on-dark); }
+  .haus-architektur .block-header p{ color:var(--slate-300); }
+  .haus-architektur .block-header p + p{ margin-top:14px; }
+  .haus-stack{ display:flex; flex-direction:column; gap:18px; }
+  .haus-grid{
+    display:grid;
+    grid-template-columns:5fr 4fr 3fr;
+    gap:18px;
+    align-items:stretch;
+  }
+  .haus-fig{ margin:0; display:flex; flex-direction:column; gap:14px; }
+  .haus-fig.haus-fig--wide{
+    display:grid;
+    grid-template-columns:1.6fr 1fr;
+    gap:32px;
+    align-items:end;
+  }
+  .haus-fig.haus-fig--wide figcaption{
+    align-self:end;
+    padding-bottom:8px;
+    max-width:340px;
+  }
+  .haus-fig .haus-img{
+    position:relative;
+    width:100%;
+    aspect-ratio:auto;
+    height:520px;
+    overflow:hidden;
+    border-radius:var(--r-lg);
+    background:#15171c;
+    cursor:zoom-in;
+    transition:transform .3s ease;
+    box-shadow:0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .haus-fig.haus-fig--wide .haus-img{ height:340px; }
+  .haus-fig .haus-img img{
+    width:100%; height:100%;
+    object-fit:cover; object-position:center;
+    display:block;
+    transition:transform .6s ease;
+  }
+  .haus-fig:hover .haus-img img{ transform:scale(1.02); }
+  .haus-fig figcaption{
+    font-family:var(--font-serif); font-style:italic;
+    font-size:15px; line-height:1.5;
+    color:var(--slate-300);
+    padding:0 4px;
+  }
+  .haus-fig .fig-meta{
+    display:block;
+    font-family:var(--font-sans);
+    font-size:10px; letter-spacing:0.22em; text-transform:uppercase;
+    color:var(--sun-500); font-weight:500;
+    margin-bottom:6px;
+  }
+  @media (max-width:960px){
+    .haus-grid{ grid-template-columns:1fr 1fr; }
+    .haus-fig:nth-child(3){ grid-column:span 2; }
+    .haus-fig .haus-img{ height:380px; }
+    .haus-fig:nth-child(3) .haus-img{ height:300px; }
+    .haus-fig.haus-fig--wide{ grid-template-columns:1fr; gap:14px; align-items:start; }
+    .haus-fig.haus-fig--wide figcaption{ max-width:none; padding-bottom:0; }
+    .haus-fig.haus-fig--wide .haus-img{ height:280px; }
+  }
+  @media (max-width:600px){
+    .haus-grid{ grid-template-columns:1fr; gap:24px; }
+    .haus-fig:nth-child(3){ grid-column:auto; }
+    .haus-fig .haus-img,
+    .haus-fig:nth-child(3) .haus-img{ height:320px; }
+    .haus-stack{ gap:24px; }
+  }
+</style>
+<section class="block haus-architektur" data-screen-label="07 Das Haus">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow eyebrow--on-dark">Architektur</p></div>
+      <h2>Naturverbundenheit &amp; funktionale Schlichtheit kombiniert</h2>
+      <p>Das Haus wurde 2024 fertiggestellt. Massive Holzbalken, von Hand verkämmt an den Ecken.
+         Holzschindeln in mehreren Lagen übereinander, die das Haus vor Wetter schützen.
+         Klappläden aus Holz vor den Fenstern.</p>
+      <p>Getragen wird das alles von einem Sockel aus dunklem Bruchstein — grobe
+         Brocken aus den Allgäuer Bergen, mit den weißen Adern, die die Felsen hier
+         seit Jahrmillionen durchziehen.</p>
+      <p>Alle Materialien stammen aus der Region. Nach altem Wissen gebaut —
+         so steht das Haus heute hier.</p>
+    </div>
+
+    <div class="haus-stack">
+    <div class="haus-grid">
+      <figure class="haus-fig">
+        <div class="haus-img" data-group="haus" data-img="assets/haus-schindel.jpg" data-label="Schindel-Detail" data-caption="Handgefertigte Holzschindeln in mehreren Reihen.">
+          <img src="assets/haus-schindel.jpg" alt="Detail handgefertigter Holzschindeln in mehreren Reihen übereinander.">
+        </div>
+        <figcaption>
+          <span class="fig-meta">01 · Schindel</span>
+          Handgefertigte Holzschindeln in mehreren Reihen.
+        </figcaption>
+      </figure>
+
+      <figure class="haus-fig">
+        <div class="haus-img" data-group="haus" data-img="assets/haus-suedseite.jpg" data-label="Süd-Seite" data-caption="Sonnenseite mit Süd-Balkon, Holzlager und Naturstein-Sockel.">
+          <img src="assets/haus-suedseite.jpg" alt="Süd-Seite des Hauses mit Balkon, Holzlager unter dem Balkon und Naturstein-Sockel.">
+        </div>
+        <figcaption>
+          <span class="fig-meta">02 · Süd-Seite</span>
+          Sonnenseite mit Süd-Balkon, Holzlager und Naturstein-Sockel.
+        </figcaption>
+      </figure>
+
+      <figure class="haus-fig">
+        <div class="haus-img" data-group="haus" data-img="assets/haus-ecke.jpg" data-label="Eckverbindung" data-caption="Massive Holzbalken, an den Ecken handwerklich verkämmt.">
+          <img src="assets/haus-ecke.jpg" alt="Eckverbindung: massive Holzbalken handwerklich verkämmt.">
+        </div>
+        <figcaption>
+          <span class="fig-meta">03 · Eckverbindung</span>
+          Massive Holzbalken, an den Ecken handwerklich verkämmt.
+        </figcaption>
+      </figure>
+    </div>
+
+      <figure class="haus-fig haus-fig--wide">
+        <div class="haus-img" data-group="haus" data-img="assets/haus-sockel.jpg" data-label="Naturstein-Sockel" data-caption="Bruchstein-Sockel aus dunklem alpinen Gestein mit kalkhaltigen weißen Adern.">
+          <img src="assets/haus-sockel.jpg" alt="Detail des Bruchstein-Sockels — dunkles alpines Gestein mit weißen Kalkadern.">
+        </div>
+        <figcaption>
+          <span class="fig-meta">04 · Naturstein-Sockel</span>
+          Bruchstein-Sockel aus dunklem alpinen Gestein mit kalkhaltigen weißen Adern.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 7 · LAGE -->
+<section class="block" id="lage" data-screen-label="07 Lage">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Lage &amp; Umgebung</p></div>
+      <h2>Zwischen Tiefenbach und Obermaiselstein.</h2>
+      <p>Im Tal der Hörnerdörfer, am Fuß des Riedbergpasses. Wege beginnen vor
+         der Tür, der Bus hält genauso davor.</p>
+
+      <div class="lage-toggle" role="tablist" aria-label="Saison wählen">
+        <button type="button" class="active" data-season="sommer">Sommer</button>
+        <button type="button" data-season="winter">Winter</button>
+      </div>
+    </div>
+
+    <div class="lage-layout">
+      <div class="map-box" aria-label="Karte der Umgebung (Platzhalter)">
+        <div class="poi" data-label="Hirschsprung" style="top:42%; left:30%;"></div>
+        <div class="poi" data-label="Sturmannshöhle" style="top:25%; left:42%;"></div>
+        <div class="poi" data-label="Sagenweg" style="top:60%; left:42%;"></div>
+        <div class="poi" data-label="Oberstdorf" style="top:75%; left:70%;"></div>
+        <div class="poi" data-label="Söllereck" style="top:18%; left:74%;"></div>
+        <div class="pin">
+          <span class="pin-label">Hirschsprung</span>
+          <span class="pin-dot"></span>
+        </div>
+        <div class="map-meta">
+          <span>Karte · Lochwiesen 4 · 87538 Obermaiselstein</span>
+          <span>Platzhalter</span>
+        </div>
+      </div>
+
+      <div>
+        <ul class="poi-list" id="poi-sommer">
+          <li>
+            <div class="poi-name">Hirschsprung <small>Naturdenkmal · Wanderstart</small></div>
+            <div class="poi-dist">ca. 1 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Sturmannshöhle <small>Naturhöhle, 460 m, mit Führung</small></div>
+            <div class="poi-dist">1 – 1,5 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Obermaiselsteiner Sagenweg <small>Themenweg, fußläufig</small></div>
+            <div class="poi-dist">ca. 1 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Breitachklamm Tiefenbach <small>Tiefste Felsenschlucht Mitteleuropas</small></div>
+            <div class="poi-dist">ca. 4 – 5 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Hörnergruppe / Hörnerbahn <small>Bergtouren &amp; Aussicht</small></div>
+            <div class="poi-dist">in der Nähe</div>
+          </li>
+          <li>
+            <div class="poi-name">Riedbergpass <small>Höchster Auto-Gebirgspass Deutschlands</small></div>
+            <div class="poi-dist">ab Haus</div>
+          </li>
+          <li>
+            <div class="poi-name">Oberstdorf · Zentrum <small>Bahnhof &amp; Fußgängerzone</small></div>
+            <div class="poi-dist">ca. 6 km</div>
+          </li>
+        </ul>
+
+        <ul class="poi-list" id="poi-winter" style="display:none;">
+          <li>
+            <div class="poi-name">Winterloipe Tiefenbach–Ferlewang <small>Skating &amp; klassisch</small></div>
+            <div class="poi-dist">5 Min. zu Fuß</div>
+          </li>
+          <li>
+            <div class="poi-name">Söllereck-Bahn <small>Familien-Skigebiet</small></div>
+            <div class="poi-dist">ca. 8 – 10 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Oberstdorfer Skigebiet <small>Nebelhorn · Fellhorn</small></div>
+            <div class="poi-dist">ca. 8 – 10 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Grasgehren <small>Ski- und Wandergebiet</small></div>
+            <div class="poi-dist">in der Nähe</div>
+          </li>
+          <li>
+            <div class="poi-name">Allgäu Coaster Söllereck <small>Ganzjahres-Rodelbahn</small></div>
+            <div class="poi-dist">ca. 8 – 10 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Skikeller am Haus <small>Schuhe trocknen, Ski lagern</small></div>
+            <div class="poi-dist">vor Ort</div>
+          </li>
+          <li>
+            <div class="poi-name">Bushaltestelle <small>Allgäu-Walser-Karte: kostenfreie Fahrten</small></div>
+            <div class="poi-dist">vor der Tür</div>
+          </li>
+        </ul>
+
+        <div class="lage-note">
+          <b>Allgäu-Walser-Pass inklusive</b>
+          Mit der Gästekarte fahren Sie kostenlos mit dem Bus. Die Haltestelle
+          liegt direkt vor unserer Tür.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 8 · GASTGEBER-STORY -->
+<section class="block story" id="gastgeber" data-screen-label="08 Gastgeber">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-portrait" aria-label="Gastgeber Patrick Schuster und Jasmin Pommer">
+        <p class="portrait-meta">— Nüüf und na</p>
+        <p class="portrait-label">Jasmin Pommer und Patrick Schuster.</p>
+      </div>
+
+      <div class="story-text">
+        <div class="eyebrow-wrap"><p class="eyebrow eyebrow--on-dark">NÜÜF UND NA</p></div>
+        <h2>Vom Alphirten zum Gastgeber.</h2>
+        <p>
+          Patrick Schuster war jahrzehntelang jeden Sommer als Hirte auf einer
+          abgeschiedenen Alpe im Allgäuer Hochgebirge — auf knapp 2.000 Metern
+          Höhe, zusammen mit über 100 Rindern, Schafen, Ziegen und Hennen. Vom
+          Alpauftrieb im Frühjahr bis zum Viehscheid im Herbst. Auf Allgäuerisch
+          nennt man das <em>„nüüf und na"</em> — immer wieder hinauf und hinunter.
+          Als der Autor Tobias Schuhwerk einen Sommer mit Patrick auf der Alpe
+          verbracht hat, ist daraus ein Buch geworden: <em>Nüüf – Hinauf</em>.
+        </p>
+        <p>
+          Heute leben Patrick und Jasmin Pommer im Allgäu und führen gemeinsam
+          die Ferienwohnung Hirschsprung. Das Holzhaus haben wir nach alter
+          Bauweise mit modernem Wissen gebaut, mit Materialien aus der Region.
+          Wir kommen aus dem Handwerk und haben an jedem Gewerk selbst Hand
+          angelegt.
+        </p>
+        <p>
+          Auf dem Hof leben Schafe, Rinder und Ziegen. Im Sommer sind die
+          Tiere auf der Weide oder auf der Alpe. Im Winter, wenn sie in der Nähe
+          des Hofs sind, dürfen Gäste sie gerne besuchen.
+        </p>
+
+        <div class="book-block">
+          <div class="book-cover"><img src="assets/buch-nueuef.webp" alt="Buchcover Nüüf – Hinauf von Tobias Schuhwerk"></div>
+          <div class="book-info">
+            <p class="eyebrow eyebrow--on-dark">Das Buch zur Geschichte</p>
+            <div class="book-title">Nüüf – Hinauf</div>
+            <div class="book-sub">Tobias Schuhwerk · ein Sommer auf einer Allgäuer Alpe</div>
+          </div>
+          <a href="https://edele.de" target="_blank" rel="noopener">Buch ansehen <i data-lucide="arrow-up-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 9 · BUCHUNG · Tramino iFrame -->
+<section class="block booking" id="buchung" data-screen-label="09 Buchung">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Buchung</p></div>
+      <h2>Bereit? Ihre Auszeit ist einen Klick entfernt.</h2>
+      <p>Belegungsplan und Anfrage über das Tramino-Buchungssystem. Wir antworten
+         in der Regel innerhalb von 24 Stunden.</p>
+    </div>
+
+    <!-- Tramino-iFrame-Platzhalter (vollständige Buchungsoberfläche) -->
+    <div class="tramino-frame" aria-label="Tramino-Buchungssystem (Platzhalter)">
+      <div class="tramino-header">
+        <span class="h-title">Belegungsplan &amp; Anfrage</span>
+        <span class="h-meta">Live-Verfügbarkeit · Tramino</span>
+      </div>
+      <div class="tramino-body">
+        <div class="cal-wrap">
+          <div class="cal-head">
+            <span class="cal-title">Juni 2026</span>
+            <div class="cal-nav">
+              <button type="button" aria-label="Vorheriger Monat"><i data-lucide="chevron-left"></i></button>
+              <button type="button" aria-label="Nächster Monat"><i data-lucide="chevron-right"></i></button>
+            </div>
+          </div>
+          <div class="cal-grid" id="cal-grid"></div>
+          <div class="cal-legend">
+            <span class="l-free">Frei</span>
+            <span class="l-booked">Belegt</span>
+            <span class="l-select">Ihr Zeitraum</span>
+          </div>
+        </div>
+
+        <div class="booking-form-side">
+          <div class="row">
+            <div class="field">
+              <label>Anreise</label>
+              <input type="text" value="14. Juni 2026" readonly>
+            </div>
+            <div class="field">
+              <label>Abreise</label>
+              <input type="text" value="21. Juni 2026" readonly>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>Erwachsene</label>
+              <select><option>1</option><option selected>2</option><option>3</option><option>4</option></select>
+            </div>
+            <div class="field">
+              <label>Kinder (bis 12)</label>
+              <select><option selected>0</option><option>1</option><option>2</option><option>3</option></select>
+            </div>
+          </div>
+
+          <div class="price-line"><span class="label">7 Nächte · 2 Erwachsene</span><span class="val">1.330 €</span></div>
+          <div class="price-line"><span class="label">Endreinigung</span><span class="val">inkl.</span></div>
+          <div class="price-line"><span class="label">Kurtaxe</span><span class="val">22 €</span></div>
+          <div class="price-line total"><span class="label">Summe</span><span class="val">1.352 €</span></div>
+
+          <button type="button" class="btn btn-primary btn-lg">Unverbindlich anfragen</button>
+          <p class="legal">20 % Anzahlung bei Buchung · Restzahlung 14 Tage vor Anreise · bis 30 Tage vorher kostenfrei stornierbar.</p>
+        </div>
+      </div>
+      <div class="tramino-foot">
+        <span>Eingebettet via Tramino</span>
+        <span>5-Sterne-Klassifizierung · DTV</span>
+      </div>
+    </div>
+
+    <!-- Akkordeon: Bitte beachten Sie ... -->
+    <div class="terms">
+      <div class="terms-row open" data-default-open>
+        <div class="terms-q">
+          <span>Stornobedingungen</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="terms-a"><div class="terms-a-inner">
+          <p><b>Bis 30 Tage vor Anreise kostenfrei.</b> Innerhalb der 30-Tage-Frist 90 % der Buchungssumme — außer wir können die Wohnung in dem Zeitraum noch weitervermieten, dann entfallen die Kosten anteilig.</p>
+        </div></div>
+      </div>
+      <div class="terms-row">
+        <div class="terms-q">
+          <span>Zahlungsbedingungen</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="terms-a"><div class="terms-a-inner">
+          <p><b>20 % Anzahlung</b> bei verbindlicher Buchung per Überweisung. <b>Restzahlung 14 Tage vor Anreise.</b></p>
+        </div></div>
+      </div>
+      <div class="terms-row">
+        <div class="terms-q">
+          <span>Reiserücktrittsversicherung</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="terms-a"><div class="terms-a-inner">
+          <p>Wir empfehlen den Abschluss einer Reiserücktrittsversicherung. Bei Bedarf vermitteln wir gern den Ergo-Partnertarif — bitte vor Anreise anfragen.</p>
+        </div></div>
+      </div>
+      <div class="terms-row">
+        <div class="terms-q">
+          <span>Allgemeine Geschäftsbedingungen (AGB)</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="terms-a"><div class="terms-a-inner">
+          <p>Die vollständigen Bedingungen finden Sie in unserem AGB-Dokument. <a href="#">AGB als PDF öffnen</a>.</p>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 10 · BEWERTUNGEN -->
+<section class="block reviews" id="bewertungen" data-screen-label="10 Bewertungen">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Gästestimmen</p></div>
+      <h2>5,0 von 5,0.</h2>
+      <div class="review-summary">
+        <span class="review-stars" aria-label="5 von 5 Sternen">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+        </span>
+      </div>
+      <p class="review-meta">25 Bewertungen auf Hörnerdörfer · 10 / 10 auf Booking.com</p>
+    </div>
+
+    <div class="reviews-grid">
+      <article class="review-card">
+        <span class="r-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+        </span>
+        <p class="review-quote">„Wunderschön gelegenes und komfortables Ferienhaus, in dem alles in perfektem Zustand war."</p>
+        <p class="review-author"><b>Peter</b><span>9. Februar 2026</span></p>
+      </article>
+      <article class="review-card">
+        <span class="r-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+        </span>
+        <p class="review-quote">„Eine wunderschöne Ferienwohnung mit allem was man braucht. Sehr sehr nette Gastgeber."</p>
+        <p class="review-author"><b>Fam. W.</b><span>18. Januar 2026</span></p>
+      </article>
+      <article class="review-card">
+        <span class="r-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+        </span>
+        <p class="review-quote">„Wir hatten eine schöne erholsame Urlaubswoche im Allgäu, dank der tollen, super ausgestatteten, modernen und sauberen Ferienwohnung."</p>
+        <p class="review-author"><b>Silvia A.</b><span>22. September 2025</span></p>
+      </article>
+      <article class="review-card">
+        <span class="r-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9.5 17 14 18.5 21 12 17 5.5 21 7 14 2 9.5 9 9 12 2"/></svg>
+        </span>
+        <p class="review-quote">„Die Wohnung war klasse, der Ausblick vom Balkon wunderschön und die Betreuung sehr freundlich!"</p>
+        <p class="review-author"><b>Heike M.</b><span>9. September 2025</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 11 · FAQ -->
+<section class="block faq" id="faq" data-screen-label="11 FAQ">
+  <div class="container">
+    <div class="block-header">
+      <div class="eyebrow-wrap"><p class="eyebrow">Gut zu wissen</p></div>
+      <h2>Häufige Fragen.</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Wie viele Personen können in der Ferienwohnung übernachten?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Unsere Ferienwohnung bietet Platz für 1 bis 4 Personen — auf 88 m² mit zwei Schlafzimmern und zwei Bädern. Bis zu 3 Kinder sind möglich, maximal 4 Personen insgesamt.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Sind Haustiere erlaubt?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Haustiere sind in der Ferienwohnung Hirschsprung leider nicht erlaubt.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Ist die Wohnung allergikerfreundlich?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Ja. Wir bieten Allergikerbettwäsche, hypoallergene Ausstattung und teppichfreie Böden (Eichendielen, Fliesen).</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Gibt es WLAN?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Ja, kostenfreies WLAN steht im gesamten Haus zur Verfügung. Der Fernseher ist internetfähig und mit Netflix ausgestattet.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Wann kann ich einchecken?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Check-in ist von 15:00 – 20:00 Uhr, Check-out von 06:00 – 10:00 Uhr. Andere Zeiten gerne nach Absprache.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Welche Zahlungs- und Stornobedingungen gelten?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Bei Buchung 20 % Anzahlung, Restzahlung 14 Tage vor Anreise per Überweisung. Bis 30 Tage vor Anreise kostenfrei stornierbar; danach 90 %, außer wir können die Wohnung noch weitervermieten.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Was muss ich im Winter bei der Anreise beachten?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Bitte planen Sie gute Winterreifen oder Allradantrieb ein. Unsere Anfahrt ist steil — eine M+S-Bereifung reicht nicht aus.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Gibt es einen Brötchenservice?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Ja, auf Wunsch beliefert Sie der Semmeldienst Allgäu — bitte vor Anreise Bescheid geben.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">
+          <span>Wie weit ist Oberstdorf entfernt?</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-a"><p>Das Zentrum von Oberstdorf erreichen Sie in etwa 10 Minuten mit dem Auto, ebenso bequem mit dem Bus. Der Bahnhof Oberstdorf liegt rund 6 km entfernt.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 12 · ANFAHRT & KONTAKT -->
+<section class="block" id="kontakt" data-screen-label="12 Anfahrt &amp; Kontakt">
+  <div class="container">
+    <div class="block-header left">
+      <div class="eyebrow-wrap"><p class="eyebrow">Anfahrt &amp; Kontakt</p></div>
+      <h2>So finden Sie zu uns.</h2>
+    </div>
+
+    <div class="kontakt-layout">
+      <div class="kontakt-map" aria-label="Standortkarte Lochwiesen 4, Obermaiselstein">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=10.2010%2C47.4105%2C10.2270%2C47.4255&amp;layer=mapnik&amp;marker=47.4180%2C10.2140"
+          loading="lazy"
+          title="Karte: Lochwiesen 4, 87538 Obermaiselstein"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <a class="map-link" href="https://www.openstreetmap.org/?mlat=47.4180&amp;mlon=10.2140#map=15/47.4180/10.2140" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+          Größere Karte
+        </a>
+        <span class="map-addr">Lochwiesen 4 · 87538 Obermaiselstein</span>
+      </div>
+
+      <div class="kontakt-info">
+        <dl>
+          <dt>Adresse</dt>
+          <dd>
+            Ferienwohnung Hirschsprung<br>
+            Jasmin Pommer<br>
+            Lochwiesen 4<br>
+            87538 Obermaiselstein
+          </dd>
+
+          <dt>Telefon</dt>
+          <dd><a href="tel:+4915205325786">+49 152 05325786</a></dd>
+
+          <dt>E-Mail</dt>
+          <dd><a href="mailto:info@ferienwohnung-hirschsprung.de">info@ferienwohnung-hirschsprung.de</a></dd>
+
+          <dt>Bus &amp; Bahn</dt>
+          <dd>
+            <b>Bushaltestelle direkt vor der Tür.</b><br>
+            Mit der Allgäu-Walser-Gästekarte kostenlos. Bahnhof Oberstdorf ca. 6 km.
+          </dd>
+        </dl>
+
+        <div class="kontakt-actions">
+          <a class="btn btn-primary" href="https://wa.me/4915205325786" target="_blank" rel="noopener">
+            <i data-lucide="message-circle"></i>
+            WhatsApp
+          </a>
+          <a class="btn btn-secondary-light" href="mailto:info@ferienwohnung-hirschsprung.de">
+            <i data-lucide="mail"></i>
+            Schreiben
+          </a>
+        </div>
+
+        <div class="kontakt-winter">
+          <b>Wichtig im Winter</b>
+          Wir haben eine steile Anfahrt. Bitte fahren Sie nur mit guten Winterreifen oder Allrad — eine M+S-Bereifung reicht nicht.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════ 13 · FOOTER -->
+<footer class="footer" data-screen-label="13 Footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="brand" aria-label="Ferienwohnung Hirschsprung – Startseite">
+          <img src="assets/logo.png" alt="" class="brand-logo footer-logo">
+          <span class="sr-only">Ferienwohnung Hirschsprung</span>
+        </a>
+        <p class="about">
+          5-Sterne-Ferienwohnung im Allgäu. 88 m² für 1 bis 4 Personen.
+          Zwischen Tiefenbach und Obermaiselstein, am Fuß der Hörnerdörfer.
+        </p>
+        <div class="footer-social">
+          <a href="https://instagram.com/ferienwohnung_hirschsprung" target="_blank" rel="noopener" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+          <a href="https://facebook.com/profile.php?id=61553950235058" target="_blank" rel="noopener" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="https://wa.me/4915205325786" target="_blank" rel="noopener" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4>Wohnung</h4>
+        <ul>
+          <li><a href="#wohnung">Ausstattung</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#lage">Lage</a></li>
+          <li><a href="#buchung">Buchen</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:info@ferienwohnung-hirschsprung.de">E-Mail</a></li>
+          <li><a href="tel:+4915205325786">+49 152 05325786</a></li>
+          <li><a href="#kontakt">Anfahrt</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">AGB</a></li>
+          <li><a href="#">Barrierefreiheit</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Jasmin Pommer &amp; Patrick Schuster</span>
+      <span class="hd-badge">Mitglied der Hörnerdörfer</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildergalerie" hidden>
+  <button type="button" class="lb-btn lb-close" aria-label="Schließen">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+  <button type="button" class="lb-btn lb-prev" aria-label="Vorheriges Bild">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+  </button>
+  <button type="button" class="lb-btn lb-next" aria-label="Nächstes Bild">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <figure class="lb-stage">
+    <span class="lb-counter" id="lb-counter">01 / 06</span>
+    <img class="lb-img" id="lb-img" alt="">
+    <figcaption class="lb-caption">
+      <span class="lb-meta" id="lb-meta"></span>
+      <span class="lb-label" id="lb-label"></span>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ Sticky-CTA Mobile -->
+<div class="sticky-cta" role="complementary" aria-label="Buchung-Schnellzugriff">
+  <div class="price">5,0 / 5,0<small>25 Bewertungen</small></div>
+  <a href="#buchung" class="btn btn-primary">Verfügbarkeit prüfen</a>
+</div>
+
+<script>
+  // ── Lucide ───────────────────────────────────────────────────
+  if (window.lucide) lucide.createIcons();
+
+  // ── Lightbox / Gallery viewer ─────────────────────────────────
+  (function(){
+    var allTiles = Array.prototype.slice.call(document.querySelectorAll('.gallery-tile[data-img], .thumb, .haus-img[data-img]'));
+    var lb = document.getElementById('lightbox');
+    if (!lb) return;
+    var img = document.getElementById('lb-img');
+    var meta = document.getElementById('lb-meta');
+    var label = document.getElementById('lb-label');
+    var counter = document.getElementById('lb-counter');
+    var btnClose = lb.querySelector('.lb-close');
+    var btnPrev = lb.querySelector('.lb-prev');
+    var btnNext = lb.querySelector('.lb-next');
+    var pad2 = function(n){ return (n<10?'0':'') + n; };
+    var currentGroup = [];
+    var idx = 0;
+    function show(i){
+      idx = (i + currentGroup.length) % currentGroup.length;
+      var t = currentGroup[idx];
+      img.src = t.getAttribute('data-img');
+      img.alt = t.getAttribute('data-caption') || '';
+      meta.textContent = t.getAttribute('data-label') || '';
+      label.textContent = t.getAttribute('data-caption') || '';
+      counter.textContent = pad2(idx+1) + ' / ' + pad2(currentGroup.length);
+    }
+    function open(group, i){
+      currentGroup = group;
+      show(i);
+      lb.hidden = false;
+      requestAnimationFrame(function(){ lb.classList.add('open'); });
+      document.body.classList.add('lb-locked');
+    }
+    function close(){
+      lb.classList.remove('open');
+      document.body.classList.remove('lb-locked');
+      setTimeout(function(){ lb.hidden = true; img.removeAttribute('src'); }, 220);
+    }
+    function groupOf(t){
+      return t.getAttribute('data-group') || (t.classList.contains('gallery-tile') ? 'wohnung' : t.classList.contains('haus-img') ? 'haus' : 'misc');
+    }
+    // Pre-bucket tiles by group so navigation only cycles within the clicked group.
+    var groups = {};
+    allTiles.forEach(function(t){
+      if (!t.getAttribute('data-img')) return; // skip placeholder thumbs without real images
+      var g = groupOf(t);
+      (groups[g] = groups[g] || []).push(t);
+    });
+    allTiles.forEach(function(t){
+      t.setAttribute('role','button');
+      t.setAttribute('tabindex','0');
+      var handler = function(){
+        if (!t.getAttribute('data-img')) return;
+        var g = groups[groupOf(t)] || [];
+        var i = g.indexOf(t);
+        if (i < 0) return;
+        open(g, i);
+      };
+      t.addEventListener('click', handler);
+      t.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); handler(); }
+      });
+    });
+    btnClose.addEventListener('click', close);
+    btnPrev.addEventListener('click', function(){ show(idx-1); });
+    btnNext.addEventListener('click', function(){ show(idx+1); });
+    lb.addEventListener('click', function(e){
+      if (e.target === lb) close();
+    });
+    document.addEventListener('keydown', function(e){
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') show(idx-1);
+      else if (e.key === 'ArrowRight') show(idx+1);
+    });
+  })();
+
+  // ── Nav: transparent → frosted on scroll ───────────────────
+  (function(){
+    var nav = document.querySelector('.nav');
+    if (!nav) return;
+    var onScroll = function(){
+      if (window.scrollY > 24) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+  })();
+
+  // ── Emblem progress ring (clockwise fill on scroll) ───────────────
+  (function(){
+    var emblem = document.querySelector('.emblem');
+    var progress = emblem && emblem.querySelector('.emblem-ring .progress');
+    if (!emblem || !progress) return;
+    var CIRC = 2 * Math.PI * 49; // 307.876
+    var last = -1;
+    function update(){
+      var rect = emblem.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var center = rect.top + rect.height / 2;
+      // Start filling when emblem center enters at 85% viewport,
+      // complete when emblem center reaches 35% from top.
+      var start = vh * 0.85;
+      var end = vh * 0.35;
+      var p = (start - center) / (start - end);
+      p = Math.max(0, Math.min(1, p));
+      if (Math.abs(p - last) < 0.005) return;
+      last = p;
+      progress.style.strokeDashoffset = (CIRC * (1 - p)).toFixed(2);
+    }
+    window.addEventListener('scroll', update, { passive:true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ── FAQ accordion ────────────────────────────────────────────
+  document.querySelectorAll('.faq-item .faq-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ── Booking terms accordion ──────────────────────────────────
+  document.querySelectorAll('.terms-row .terms-q').forEach(function(q){
+    q.addEventListener('click', function(){
+      q.parentElement.classList.toggle('open');
+    });
+  });
+
+  // ── Lage Sommer/Winter Toggle ────────────────────────────────
+  document.querySelectorAll('.lage-toggle button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var season = btn.getAttribute('data-season');
+      document.querySelectorAll('.lage-toggle button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.getElementById('poi-sommer').style.display = (season==='sommer') ? '' : 'none';
+      document.getElementById('poi-winter').style.display = (season==='winter') ? '' : 'none';
+    });
+  });
+
+  // ── Smooth scroll w/ sticky-nav offset ───────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id.length > 1 && document.querySelector(id)){
+        e.preventDefault();
+        var target = document.querySelector(id);
+        var top = target.getBoundingClientRect().top + window.scrollY - 72;
+        window.scrollTo({ top: top, behavior:'smooth' });
+      }
+    });
+  });
+
+  // ── Calendar render (June 2026 Demo) ─────────────────────────
+  (function(){
+    var grid = document.getElementById('cal-grid');
+    if (!grid) return;
+    var dows = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+    dows.forEach(function(d){
+      var el = document.createElement('div'); el.className='dow'; el.textContent=d; grid.appendChild(el);
+    });
+    // June 2026: 1st = Monday. So no leading empty days.
+    var booked = [3,4,5,6,7, 22,23,24,25,26,27,28]; // demo
+    var rangeStart = 14, rangeEnd = 21;
+    for (var i=1; i<=30; i++){
+      var d = document.createElement('div');
+      d.className='d';
+      d.textContent = i;
+      if (booked.indexOf(i) >= 0) d.classList.add('booked');
+      if (i > rangeStart && i < rangeEnd) d.classList.add('range');
+      if (i === rangeStart || i === rangeEnd) d.classList.add('range','range-edge');
+      if (i === 14) d.classList.add('today');
+      grid.appendChild(d);
+    }
+  })();
+</script>
+</body>
+</html>
