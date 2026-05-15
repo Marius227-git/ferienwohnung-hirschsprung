@@ -86,7 +86,7 @@ img{ display:block; max-width:100%; }
 
 /* ── Top Nav (transparent on hero, frosted on scroll) ───────────── */
 .nav{
-  position:fixed; top:0; left:0; right:0; z-index:50;
+  position:fixed; top:0; left:0; right:0; z-index:201;
   background:transparent;
   border-bottom:0.5px solid transparent;
   transition:background var(--t-base), border-color var(--t-base), backdrop-filter var(--t-base);
@@ -131,32 +131,34 @@ img{ display:block; max-width:100%; }
 /* Hamburger */
 .nav-hamburger{
   display:none; flex-direction:column; justify-content:center; gap:5px;
-  width:36px; height:36px; background:none; border:none; cursor:pointer;
-  padding:4px; border-radius:var(--r-sm); flex-shrink:0;
+  width:40px; height:40px; border:none; cursor:pointer; flex-shrink:0;
+  padding:8px; border-radius:8px; background:none;
 }
 .nav-hamburger span{
-  display:block; height:2px; background:#fff;
-  border-radius:2px; transition:transform 0.22s ease, opacity 0.15s ease;
-  box-shadow:0 1px 3px rgba(0,0,0,0.45);
+  display:block; height:2px; width:100%; background:#fff;
+  border-radius:2px; transition:transform 0.22s ease, opacity 0.15s ease, background 0.15s ease;
 }
-.nav.scrolled .nav-hamburger span{ background:var(--slate-800); box-shadow:none; }
+.nav.scrolled .nav-hamburger span{ background:var(--slate-800); }
+.nav.menu-open .nav-hamburger span{ background:#fff; }
 .nav.menu-open .nav-hamburger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
 .nav.menu-open .nav-hamburger span:nth-child(2){ opacity:0; }
 .nav.menu-open .nav-hamburger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-/* Mobile drawer – full-screen overlay */
+/* Mobile menu – full-screen overlay, lives OUTSIDE nav to escape backdrop-filter stacking context */
 .mob-menu{
-  display:none; flex-direction:column; justify-content:center;
-  position:fixed; inset:0; z-index:49;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  position:fixed; inset:0; z-index:200;
   background:var(--slate-800);
-  padding:88px 36px calc(40px + env(safe-area-inset-bottom, 0px));
-  opacity:0; transform:translateY(-8px);
-  transition:opacity 0.25s ease, transform 0.25s ease;
-  pointer-events:none;
+  padding:56px 36px calc(40px + env(safe-area-inset-bottom, 0px));
+  overflow:hidden;
+  visibility:hidden; opacity:0;
+  transition:opacity 0.25s ease, visibility 0s linear 0.25s;
 }
-.nav.menu-open .mob-menu{
-  display:flex; opacity:1; transform:translateY(0); pointer-events:auto;
+body.menu-open .mob-menu{
+  visibility:visible; opacity:1;
+  transition:opacity 0.25s ease, visibility 0s linear 0s;
 }
+body.menu-open{ overflow:hidden; }
 .mob-menu a{
   font-family:var(--font-serif); font-size:30px; font-weight:400;
   color:rgba(250,247,240,0.72); text-decoration:none;
@@ -1454,6 +1456,33 @@ body.lb-locked{ overflow:hidden; }
   .trust-cell .trust-label{ font-size:8px; margin-bottom:2px; }
   .cta-group .btn{ width:100%; flex:1 1 100%; }
 }
+
+/* ── Fade-up animation ───────────────────────────────────────── */
+[data-fade-up]{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity 0.6s cubic-bezier(0.22,1,0.36,1),
+             transform 0.6s cubic-bezier(0.22,1,0.36,1);
+  transition-delay:var(--fade-delay, 0ms);
+}
+[data-fade-up].fade-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ── Letter reveal animation ─────────────────────────────────── */
+[data-letter-reveal] .char{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(42px) rotate(4deg);
+  transition:opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+             transform 0.55s cubic-bezier(0.22,1,0.36,1);
+  transition-delay:calc(var(--char-i) * 38ms);
+}
+[data-letter-reveal].chars-visible .char{
+  opacity:1;
+  transform:translateY(0) rotate(0deg);
+}
 </style>
 </head>
 <body>
@@ -1476,15 +1505,15 @@ body.lb-locked{ overflow:hidden; }
       <span></span><span></span><span></span>
     </button>
   </div>
-  <div class="mob-menu" id="mob-menu" aria-hidden="true">
-    <a href="#wohnung">Wohnung</a>
-    <a href="#lage">Lage</a>
-    <a href="#gastgeber">Gastgeber</a>
-    <a href="#bewertungen">Bewertungen</a>
-    <a href="#faq">FAQ</a>
-    <a href="#buchung">Jetzt buchen</a>
-  </div>
 </nav>
+<div class="mob-menu" id="mob-menu" aria-hidden="true">
+  <a href="#wohnung">Wohnung</a>
+  <a href="#lage">Lage</a>
+  <a href="#gastgeber">Gastgeber</a>
+  <a href="#bewertungen">Bewertungen</a>
+  <a href="#faq">FAQ</a>
+  <a href="#buchung">Jetzt buchen</a>
+</div>
 
 <a id="top"></a>
 
@@ -1554,22 +1583,22 @@ body.lb-locked{ overflow:hidden; }
     </div>
     <div class="block-header">
       <div class="eyebrow-wrap"><p class="eyebrow">Drei gute Gründe</p></div>
-      <h2>Warum Hirschsprung.</h2>
-      <p>Neues Holzhaus in herrlicher Lage. Was Sie hier finden — und was Sie nirgendwo sonst so finden.</p>
+      <h2 data-letter-reveal>Warum Hirschsprung.</h2>
+      <p data-fade-up>Neues Holzhaus in herrlicher Lage. Was Sie hier finden — und was Sie nirgendwo sonst so finden.</p>
     </div>
 
     <div class="usp-grid">
-      <article class="usp-card">
+      <article class="usp-card" data-fade-up style="--fade-delay:0ms">
         <div class="usp-icon"><i data-lucide="home"></i></div>
         <h3>Holzhaus aus regionalen Materialien</h3>
         <p>Nach alter Bauweise mit regionalen Materialien gefertigt, mit offenem Dachstuhl in allen Räumen und Eichendielen auf dem Boden. Patrick und Jasmin haben an jedem Gewerk selbst Hand angelegt.</p>
       </article>
-      <article class="usp-card">
+      <article class="usp-card" data-fade-up style="--fade-delay:80ms">
         <div class="usp-icon"><i data-lucide="mountain"></i></div>
         <h3>Süd-Balkon mit Dreigestirn-Blick</h3>
         <p>Trettachspitze, Mädelegabel, Hochfrottspitze — und das Söllereck dazu. Vom Frühstückstisch bis zum Abendrot schauen Sie vom Balkon aus zu.</p>
       </article>
-      <article class="usp-card">
+      <article class="usp-card" data-fade-up style="--fade-delay:160ms">
         <div class="usp-icon"><i data-lucide="footprints"></i></div>
         <h3>Berge beginnen an der Haustür</h3>
         <p>Wandern und Biken ab Haus. Loipe in 5 Minuten zu Fuß. Skigebiete Nebelhorn 8 Kilometern Entfernung. Bushaltestelle direkt vor der Tür. Ihr Auto parkt im Carport.</p>
@@ -1584,8 +1613,8 @@ body.lb-locked{ overflow:hidden; }
   <div class="container">
     <div class="teaser-inner">
       <div class="eyebrow-wrap"><p class="eyebrow">ALLES WAS SIE BRAUCHEN</p></div>
-      <h2>Ankommen &amp; Wohlfühlen</h2>
-      <p>Helle Eichendielen, offener Dachstuhl, Fußbodenheizung in jedem Raum. Im Wohnraum steht eine Kaffeemaschine — Siebträger- und Filtermaschine in einem. Vom Balkon genießen Sie den Blick auf das gewaltige Allgäuer Dreigestirn. Vor der Haustür beginnen wunderschöne Wanderwege ins Lochbachtal und Rohrmoostal.</p>
+      <h2 data-letter-reveal>Ankommen &amp; Wohlfühlen</h2>
+      <p data-fade-up>Helle Eichendielen, offener Dachstuhl, Fußbodenheizung in jedem Raum. Im Wohnraum steht eine Kaffeemaschine — Siebträger- und Filtermaschine in einem. Vom Balkon genießen Sie den Blick auf das gewaltige Allgäuer Dreigestirn. Vor der Haustür beginnen wunderschöne Wanderwege ins Lochbachtal und Rohrmoostal.</p>
       <p>88 m² gür ein geräumiges Wohnen mit 2 Bädern und 2 Schlafzimmern.</p>
     </div>
   </div>
@@ -1630,7 +1659,7 @@ body.lb-locked{ overflow:hidden; }
   <div class="container">
     <div class="block-header">
       <div class="eyebrow-wrap"><p class="eyebrow">Die Wohnung</p></div>
-      <h2>88 m². Zwei Schlafzimmer. Drei Bäder.</h2>
+      <h2>88 m². Zwei Schlafzimmer. Zwei Bäder.</h2>
       <p>Offener Dachstuhl in allen Räumen. Eichendielen auf dem Boden. Möbel von Schreinerhand. Hier ein einige Impressionen.</p>
     </div>
 
@@ -2585,20 +2614,23 @@ body.lb-locked{ overflow:hidden; }
     // Mobile hamburger
     var hamburger = document.getElementById('nav-hamburger');
     var mobMenu = document.getElementById('mob-menu');
+    function closeMenu(){
+      nav.classList.remove('menu-open');
+      document.body.classList.remove('menu-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobMenu.setAttribute('aria-hidden', 'true');
+      hamburger.setAttribute('aria-label', 'Menü öffnen');
+    }
     if (hamburger && mobMenu) {
       hamburger.addEventListener('click', function(){
         var open = nav.classList.toggle('menu-open');
+        document.body.classList.toggle('menu-open', open);
         hamburger.setAttribute('aria-expanded', open);
         mobMenu.setAttribute('aria-hidden', !open);
         hamburger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
       });
       mobMenu.querySelectorAll('a').forEach(function(link){
-        link.addEventListener('click', function(){
-          nav.classList.remove('menu-open');
-          hamburger.setAttribute('aria-expanded', 'false');
-          mobMenu.setAttribute('aria-hidden', 'true');
-          hamburger.setAttribute('aria-label', 'Menü öffnen');
-        });
+        link.addEventListener('click', closeMenu);
       });
     }
   })();
@@ -2710,6 +2742,39 @@ body.lb-locked{ overflow:hidden; }
       if (i === 14) d.classList.add('today');
       grid.appendChild(d);
     }
+  })();
+
+  // ── Fade-up ───────────────────────────────────────────────────
+  (function(){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('fade-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-fade-up]').forEach(function(el){ io.observe(el); });
+  })();
+
+  // ── Letter reveal ─────────────────────────────────────────────
+  (function(){
+    document.querySelectorAll('[data-letter-reveal]').forEach(function(el){
+      var text = el.textContent;
+      el.innerHTML = '';
+      var i = 0;
+      text.split('').forEach(function(ch){
+        var span = document.createElement('span');
+        span.className = 'char';
+        span.style.setProperty('--char-i', i);
+        span.textContent = ch === ' ' ? ' ' : ch;
+        el.appendChild(span);
+        if(ch !== ' ') i++;
+      });
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('chars-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('[data-letter-reveal]').forEach(function(el){ io.observe(el); });
   })();
 </script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
