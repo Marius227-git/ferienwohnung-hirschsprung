@@ -127,8 +127,42 @@ img{ display:block; max-width:100%; }
 .nav.scrolled .nav-links a:not(.btn){ color:var(--slate-700); }
 .nav.scrolled .nav-links a:not(.btn):hover{ color:var(--slate-800); }
 .nav-cta{ padding:11px 20px; font-size:13px; }
+
+/* Hamburger */
+.nav-hamburger{
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:36px; height:36px; background:none; border:none; cursor:pointer;
+  padding:4px; border-radius:var(--r-sm); flex-shrink:0;
+}
+.nav-hamburger span{
+  display:block; height:2px; background:rgba(250,247,240,0.9);
+  border-radius:2px; transition:transform 0.22s ease, opacity 0.15s ease;
+}
+.nav.scrolled .nav-hamburger span{ background:var(--slate-700); }
+.nav.menu-open .nav-hamburger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.nav.menu-open .nav-hamburger span:nth-child(2){ opacity:0; }
+.nav.menu-open .nav-hamburger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+/* Mobile drawer */
+.mob-menu{
+  display:none; flex-direction:column;
+  background:rgba(250,247,240,0.98); backdrop-filter:blur(12px);
+  border-top:0.5px solid var(--slate-200);
+  padding:4px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+}
+.mob-menu a{
+  font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--slate-700); text-decoration:none;
+  padding:15px 20px; border-bottom:0.5px solid var(--slate-100);
+  transition:background var(--t-base), color var(--t-base);
+}
+.mob-menu a:last-child{ border-bottom:none; }
+.mob-menu a:active{ background:var(--slate-100); color:var(--slate-800); }
+.nav.menu-open .mob-menu{ display:flex; }
+
 @media (max-width:760px){
-  .nav-links a:not(.btn){ display:none; }
+  .nav-links{ display:none; }
+  .nav-hamburger{ display:flex; }
   .brand-logo{ height:52px; }
 }
 
@@ -1413,7 +1447,7 @@ body.lb-locked{ overflow:hidden; }
 <body>
 
 <!-- ════════════════════════════════════════════════════════════ NAV -->
-<nav class="nav" data-screen-label="00 Nav">
+<nav class="nav" id="site-nav" data-screen-label="00 Nav">
   <div class="nav-inner">
     <a href="#top" class="brand" aria-label="Ferienwohnung Hirschsprung – Startseite">
       <img src="assets/logo.png" alt="" class="brand-logo" width="400" height="300">
@@ -1426,6 +1460,17 @@ body.lb-locked{ overflow:hidden; }
       <a href="#bewertungen">Bewertungen</a>
       <a href="#buchung" class="btn btn-primary nav-cta">Jetzt buchen</a>
     </div>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mob-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mob-menu" id="mob-menu" aria-hidden="true">
+    <a href="#wohnung">Wohnung</a>
+    <a href="#lage">Lage</a>
+    <a href="#gastgeber">Gastgeber</a>
+    <a href="#bewertungen">Bewertungen</a>
+    <a href="#faq">FAQ</a>
+    <a href="#buchung">Jetzt buchen</a>
   </div>
 </nav>
 
@@ -2025,19 +2070,6 @@ body.lb-locked{ overflow:hidden; }
           Für Interessierte – hier kann das Buch erworben werden:<br>
           <a href="https://edele.de/shop/item/9783000752179/nuuf-von-tobias-schuhwerk" target="_blank" rel="noopener"><em>Nüüf – Hinauf</em></a>
         </p>
-        <p>
-          Heute leben Patrick und Jasmin Pommer im Allgäu und führen gemeinsam
-          die Ferienwohnung Hirschsprung. Das Holzhaus haben wir nach alter
-          Bauweise mit modernem Wissen gebaut, mit Materialien aus der Region.
-          Wir kommen aus dem Handwerk und haben an jedem Gewerk selbst Hand
-          angelegt.
-        </p>
-        <p>
-          Auf dem Hof leben Schafe, Rinder und Ziegen. Im Sommer sind die
-          Tiere auf der Weide oder auf der Alpe. Im Winter, wenn sie in der Nähe
-          des Hofs sind, dürfen Gäste sie gerne besuchen.
-        </p>
-
         <div class="book-block">
           <div class="book-cover"><img src="assets/buch-nueuef.webp" alt="Buchcover Nüüf – Hinauf von Tobias Schuhwerk"></div>
           <div class="book-info">
@@ -2541,6 +2573,26 @@ body.lb-locked{ overflow:hidden; }
     };
     window.addEventListener('scroll', onScroll, { passive:true });
     onScroll();
+
+    // Mobile hamburger
+    var hamburger = document.getElementById('nav-hamburger');
+    var mobMenu = document.getElementById('mob-menu');
+    if (hamburger && mobMenu) {
+      hamburger.addEventListener('click', function(){
+        var open = nav.classList.toggle('menu-open');
+        hamburger.setAttribute('aria-expanded', open);
+        mobMenu.setAttribute('aria-hidden', !open);
+        hamburger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      });
+      mobMenu.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          nav.classList.remove('menu-open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobMenu.setAttribute('aria-hidden', 'true');
+          hamburger.setAttribute('aria-label', 'Menü öffnen');
+        });
+      });
+    }
   })();
 
   // ── Emblem progress ring (clockwise fill on scroll) ───────────────
