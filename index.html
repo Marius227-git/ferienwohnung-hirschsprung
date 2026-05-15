@@ -2664,8 +2664,6 @@ body.lb-locked{ overflow:hidden; }
       // Trigger DOMContentLoaded-equivalent: dispatch a custom init event
       // The init block above uses typeof L check, so just repeat it inline here
       var map = L.map('lage-map', {
-        center: [47.405, 10.230],
-        zoom: 10,
         zoomControl: false,
         attributionControl: true,
         scrollWheelZoom: false,
@@ -2709,6 +2707,20 @@ body.lb-locked{ overflow:hidden; }
         L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
         L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') })
       ]);
+
+      // Fit to all marker coordinates with padding for labels
+      var _bounds = [
+        [47.4282, 10.2377], // Hirschsprung
+        [47.4630, 10.2275], // Hörnerbahn
+        [47.4360, 10.2352], // Sturmannshöhle
+        [47.4219, 10.3423], // Nebelhorn
+        [47.4077, 10.2781], // Oberstdorf
+        [47.3736, 10.2376], // Söllereck
+        [47.3550, 10.1728], // Kleinwalsertal
+        [47.3506, 10.2176], // Fellhorn
+        [47.4373, 10.1769]  // Riedbergpass (winter)
+      ];
+      map.fitBounds(_bounds, { padding: [52, 52] });
 
       document.getElementById('map-zoom-in').addEventListener('click', function(){ map.zoomIn(); });
       document.getElementById('map-zoom-out').addEventListener('click', function(){ map.zoomOut(); });
