@@ -143,6 +143,15 @@ img{ display:block; max-width:100%; }
 .nav.menu-open .nav-hamburger span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
 .nav.menu-open .nav-hamburger span:nth-child(2){ opacity:0; }
 .nav.menu-open .nav-hamburger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+/* When menu open, always show nav as transparent/dark regardless of scroll */
+body.menu-open .nav.scrolled{
+  background:transparent; border-bottom-color:transparent;
+  -webkit-backdrop-filter:none; backdrop-filter:none;
+}
+body.menu-open .nav.scrolled .brand{ color:var(--on-dark); }
+body.menu-open .nav.scrolled .brand-logo{
+  filter:brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.55));
+}
 
 /* Mobile menu – full-screen overlay, lives OUTSIDE nav to escape backdrop-filter stacking context */
 .mob-menu{
