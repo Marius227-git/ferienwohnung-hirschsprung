@@ -968,8 +968,7 @@ section.block{ padding:96px 0; }
 }
 .terms-q .chev{ width:18px; height:18px; transition:transform var(--t-base); stroke:var(--slate-500); }
 .terms-row.open .terms-q .chev{ transform:rotate(180deg); stroke:var(--sun-700); }
-.terms-a{ max-height:0; overflow:hidden; transition:max-height var(--t-base); }
-.terms-row.open .terms-a{ max-height:260px; }
+.terms-a{ height:0; overflow:hidden; transition:height 0.35s cubic-bezier(0.22,1,0.36,1); }
 .terms-a-inner{ padding:0 24px 20px; font-size:13.5px; color:var(--slate-500); line-height:1.7; }
 .terms-a-inner b{ color:var(--slate-800); font-weight:500; }
 
@@ -2123,7 +2122,7 @@ body.lb-locked{ overflow:hidden; }
             <div class="book-title">Nüüf – Hinauf</div>
             <div class="book-sub">Tobias Schuhwerk · ein Sommer auf einer Allgäuer Alpe</div>
           </div>
-          <a href="https://edele.de" target="_blank" rel="noopener">Buch ansehen <i data-lucide="arrow-up-right"></i></a>
+          <a href="https://edele.de/shop/item/9783000752179/nuuf-von-tobias-schuhwerk" target="_blank" rel="noopener">Buch ansehen <i data-lucide="arrow-up-right"></i></a>
         </div>
       </div>
     </div>
@@ -2735,7 +2734,28 @@ body.lb-locked{ overflow:hidden; }
   // ── Booking terms accordion ──────────────────────────────────
   document.querySelectorAll('.terms-row .terms-q').forEach(function(q){
     q.addEventListener('click', function(){
-      q.parentElement.classList.toggle('open');
+      var item = q.parentElement;
+      var ans = item.querySelector('.terms-a');
+      var opening = !item.classList.contains('open');
+      if(opening){
+        item.classList.add('open');
+        ans.style.height = ans.scrollHeight + 'px';
+        ans.addEventListener('transitionend', function h(){
+          ans.style.height = 'auto';
+          ans.removeEventListener('transitionend', h);
+        });
+      } else {
+        ans.style.height = ans.scrollHeight + 'px';
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            ans.style.height = '0';
+          });
+        });
+        ans.addEventListener('transitionend', function h(){
+          item.classList.remove('open');
+          ans.removeEventListener('transitionend', h);
+        });
+      }
     });
   });
 
