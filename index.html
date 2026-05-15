@@ -144,22 +144,33 @@ img{ display:block; max-width:100%; }
 .nav.menu-open .nav-hamburger span:nth-child(2){ opacity:0; }
 .nav.menu-open .nav-hamburger span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-/* Mobile drawer */
+/* Mobile drawer – full-screen overlay */
 .mob-menu{
-  display:none; flex-direction:column;
-  background:rgba(250,247,240,0.98); backdrop-filter:blur(12px);
-  border-top:0.5px solid var(--slate-200);
-  padding:4px 0 calc(12px + env(safe-area-inset-bottom, 0px));
+  display:none; flex-direction:column; justify-content:center;
+  position:fixed; inset:0; z-index:49;
+  background:var(--slate-800);
+  padding:88px 36px calc(40px + env(safe-area-inset-bottom, 0px));
+  opacity:0; transform:translateY(-8px);
+  transition:opacity 0.25s ease, transform 0.25s ease;
+  pointer-events:none;
+}
+.nav.menu-open .mob-menu{
+  display:flex; opacity:1; transform:translateY(0); pointer-events:auto;
 }
 .mob-menu a{
-  font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
-  color:var(--slate-700); text-decoration:none;
-  padding:15px 20px; border-bottom:0.5px solid var(--slate-100);
-  transition:background var(--t-base), color var(--t-base);
+  font-family:var(--font-serif); font-size:30px; font-weight:400;
+  color:rgba(250,247,240,0.72); text-decoration:none;
+  padding:16px 0; border-bottom:0.5px solid rgba(250,247,240,0.1);
+  letter-spacing:0.01em;
+  transition:color 0.18s ease;
 }
-.mob-menu a:last-child{ border-bottom:none; }
-.mob-menu a:active{ background:var(--slate-100); color:var(--slate-800); }
-.nav.menu-open .mob-menu{ display:flex; }
+.mob-menu a:last-child{
+  border-bottom:none; margin-top:24px;
+  font-family:var(--font-sans); font-size:13px; font-weight:600;
+  letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--sun-500);
+}
+.mob-menu a:active{ color:rgba(250,247,240,1); }
 
 @media (max-width:760px){
   .nav-links{ display:none; }
@@ -2066,10 +2077,6 @@ body.lb-locked{ overflow:hidden; }
         </p>
         <p>
           Einen Sommer lang wurde er von dem Autor des Buches, Tobias Schuhwerk begleitet. Das dabei entstandene Buch gibt einen besonderen Einblick in die bewegte Historie der Allgäuer Alpwirtschaft und deren Kulturlandschaft.
-        </p>
-        <p>
-          Für Interessierte – hier kann das Buch erworben werden:<br>
-          <a href="https://edele.de/shop/item/9783000752179/nuuf-von-tobias-schuhwerk" target="_blank" rel="noopener"><em>Nüüf – Hinauf</em></a>
         </p>
         <div class="book-block">
           <div class="book-cover"><img src="assets/buch-nueuef.webp" alt="Buchcover Nüüf – Hinauf von Tobias Schuhwerk"></div>
