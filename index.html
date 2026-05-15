@@ -2712,21 +2712,8 @@ body.lb-locked{ overflow:hidden; }
       ]);
 
       // Fit to all marker coordinates with padding for labels
-      var _bounds = [
-        [47.4282, 10.2377], // Hirschsprung
-        [47.4630, 10.2275], // Hörnerbahn
-        [47.4360, 10.2352], // Sturmannshöhle
-        [47.4219, 10.3423], // Nebelhorn
-        [47.4077, 10.2781], // Oberstdorf
-        [47.3736, 10.2376], // Söllereck
-        [47.3550, 10.1728], // Kleinwalsertal
-        [47.3506, 10.2176], // Fellhorn
-        [47.4373, 10.1769], // Riedbergpass (winter)
-        [47.3547, 10.1002], // Hoher Ifen
-        [47.3648, 10.3015], // Christlessee
-        [47.3903, 10.3357]  // Oytal
-      ];
-      map.fitBounds(_bounds, { padding: [52, 52] });
+      // Center balances Hoher Ifen (west) against Nebelhorn/Oytal (east) at zoom 11
+      map.setView([47.400, 10.248], 11);
 
       document.getElementById('map-zoom-in').addEventListener('click', function(){ map.zoomIn(); });
       document.getElementById('map-zoom-out').addEventListener('click', function(){ map.zoomOut(); });
