@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@0.395.0/dist/umd/lucide.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
 /* ════════════════════════════════════════════════════════════════
@@ -632,48 +633,73 @@ section.block{ padding:96px 0; }
   display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:start;
 }
 .map-box{
-  aspect-ratio:1.25/1;
+  aspect-ratio:1.23/1;
   border-radius:var(--r-lg); overflow:hidden; position:relative;
   border:0.5px solid var(--slate-200);
-  background:
-    radial-gradient(circle at 30% 70%, #E6E3D8 0%, transparent 50%),
-    radial-gradient(circle at 70% 30%, #DDD9D0 0%, transparent 50%),
-    linear-gradient(135deg, #EAE6DA 0%, #C9C5BA 100%);
 }
-.map-box .pin{
-  position:absolute; top:50%; left:55%;
-  transform:translate(-50%, -100%);
-  display:flex; flex-direction:column; align-items:center; gap:4px;
-  z-index:2;
+#lage-map{ width:100%; height:100%; }
+.map-box::before{
+  content:''; position:absolute; bottom:0; left:0; right:0; height:64px;
+  background:linear-gradient(transparent, rgba(28,31,36,0.55));
+  z-index:500; pointer-events:none;
 }
-.map-box .pin-dot{
-  width:18px; height:18px; border-radius:50%;
-  background:var(--sun-500); border:3px solid var(--slate-800);
-  box-shadow:0 2px 6px rgba(28,31,36,0.25);
+/* Leaflet home pin — dot at top, label lower-left so northern markers stay visible */
+.lf-pin{
+  display:flex; flex-direction:column; align-items:flex-start; gap:4px; white-space:nowrap;
 }
-.map-box .pin-label{
+.lf-label{
   background:var(--slate-800); color:var(--on-dark);
-  font-size:11px; letter-spacing:0.18em; text-transform:uppercase; font-weight:500;
-  padding:6px 10px; border-radius:var(--r-sm); white-space:nowrap;
-  position:absolute; top:-36px; left:50%; transform:translateX(-50%);
+  font-size:10px; letter-spacing:0.15em; text-transform:uppercase; font-weight:600;
+  padding:5px 9px; border-radius:var(--r-sm);
+  box-shadow:0 2px 6px rgba(28,31,36,0.22);
 }
-.map-box .poi{
-  position:absolute; width:10px; height:10px; border-radius:50%;
-  background:var(--bg-white); border:2px solid var(--slate-800);
+.lf-dot{
+  width:14px; height:14px; border-radius:50%; flex-shrink:0;
+  background:var(--sun-500); border:2.5px solid var(--slate-800);
+  box-shadow:0 2px 8px rgba(28,31,36,0.35);
 }
-.map-box .poi::after{
-  content:attr(data-label);
-  position:absolute; left:14px; top:-4px;
-  font-size:11px; color:var(--slate-700); font-weight:500;
-  white-space:nowrap; background:rgba(250,247,240,0.85);
-  padding:2px 6px; border-radius:var(--r-sm);
+/* Leaflet POI markers */
+.lf-poi{
+  display:flex; flex-direction:row; align-items:center; gap:5px; white-space:nowrap;
+}
+.lf-poi-dot{
+  width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  background:var(--slate-800); border:1.5px solid rgba(250,247,240,0.95);
+  box-shadow:0 1px 4px rgba(28,31,36,0.4);
+}
+.lf-poi-label{
+  font-size:9px; letter-spacing:0.1em; text-transform:uppercase; font-weight:700;
+  color:var(--slate-800); background:rgba(250,247,240,0.92);
+  padding:2px 6px; border-radius:3px;
+  border:0.5px solid rgba(28,31,36,0.12);
+  box-shadow:0 1px 3px rgba(28,31,36,0.1);
+}
+/* Leaflet overrides */
+.leaflet-attribution-flag{ display:none!important; }
+.leaflet-control-attribution{
+  font-size:8px!important; background:rgba(250,247,240,0.75)!important;
+  border-radius:4px 0 0 0!important;
 }
 .map-meta{
-  position:absolute; bottom:16px; left:18px; right:18px;
+  position:absolute; bottom:14px; left:18px; right:18px; z-index:600;
   display:flex; justify-content:space-between; align-items:center;
-  font-size:11px; letter-spacing:0.18em; text-transform:uppercase;
-  color:var(--slate-700); font-weight:500;
+  font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase;
+  color:rgba(245,242,234,0.85); font-weight:500;
 }
+.map-zoom{
+  position:absolute; top:12px; right:12px; z-index:600;
+  display:flex; flex-direction:column; gap:4px;
+}
+.map-zoom button{
+  width:30px; height:30px; border:none; cursor:pointer;
+  background:rgba(250,247,240,0.92); backdrop-filter:blur(4px);
+  border-radius:6px; box-shadow:0 1px 4px rgba(28,31,36,0.18);
+  color:var(--slate-800); font-size:18px; line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.15s;
+}
+.map-zoom button:hover{ background:rgba(250,247,240,1); }
+.map-zoom button:active{ background:var(--slate-100); }
 
 .poi-list{ list-style:none; padding:0; margin:0; }
 .poi-list li{
@@ -1870,8 +1896,7 @@ body.lb-locked{ overflow:hidden; }
     <div class="block-header">
       <div class="eyebrow-wrap"><p class="eyebrow">Lage &amp; Umgebung</p></div>
       <h2>Zwischen Tiefenbach und Obermaiselstein.</h2>
-      <p>Im Tal der Hörnerdörfer, am Fuß des Riedbergpasses. Wege beginnen vor
-         der Tür, der Bus hält genauso davor.</p>
+      <p>Zu Fuß oder mit dem Rad direkt eine Tour ins Lochbachtal oder Rohrmoos starten. Bushaltestelle direkt vor der Haustür.</p>
 
       <div class="lage-toggle" role="tablist" aria-label="Saison wählen">
         <button type="button" class="active" data-season="sommer">Sommer</button>
@@ -1880,42 +1905,25 @@ body.lb-locked{ overflow:hidden; }
     </div>
 
     <div class="lage-layout">
-      <div class="map-box" aria-label="Karte der Umgebung (Platzhalter)">
-        <div class="poi" data-label="Hirschsprung" style="top:42%; left:30%;"></div>
-        <div class="poi" data-label="Sturmannshöhle" style="top:25%; left:42%;"></div>
-        <div class="poi" data-label="Sagenweg" style="top:60%; left:42%;"></div>
-        <div class="poi" data-label="Oberstdorf" style="top:75%; left:70%;"></div>
-        <div class="poi" data-label="Söllereck" style="top:18%; left:74%;"></div>
-        <div class="pin">
-          <span class="pin-label">Hirschsprung</span>
-          <span class="pin-dot"></span>
+      <div class="map-box" aria-label="Lage Ferienwohnung Hirschsprung">
+        <div id="lage-map"></div>
+        <div class="map-zoom">
+          <button id="map-zoom-in" aria-label="Vergrößern">+</button>
+          <button id="map-zoom-out" aria-label="Verkleinern">−</button>
         </div>
         <div class="map-meta">
-          <span>Karte · Lochwiesen 4 · 87538 Obermaiselstein</span>
-          <span>Platzhalter</span>
+          <span>Lochwiesen 4 · 87538 Obermaiselstein</span>
         </div>
       </div>
 
       <div>
         <ul class="poi-list" id="poi-sommer">
           <li>
-            <div class="poi-name">Hirschsprung <small>Naturdenkmal · Wanderstart</small></div>
-            <div class="poi-dist">ca. 1 km</div>
-          </li>
-          <li>
             <div class="poi-name">Sturmannshöhle <small>Naturhöhle, 460 m, mit Führung</small></div>
             <div class="poi-dist">1 – 1,5 km</div>
           </li>
           <li>
-            <div class="poi-name">Obermaiselsteiner Sagenweg <small>Themenweg, fußläufig</small></div>
-            <div class="poi-dist">ca. 1 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Breitachklamm Tiefenbach <small>Tiefste Felsenschlucht Mitteleuropas</small></div>
-            <div class="poi-dist">ca. 4 – 5 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Hörnergruppe / Hörnerbahn <small>Bergtouren &amp; Aussicht</small></div>
+            <div class="poi-name">Hörnerbahn <small>Bergtouren &amp; Panoramablick</small></div>
             <div class="poi-dist">in der Nähe</div>
           </li>
           <li>
@@ -1923,39 +1931,51 @@ body.lb-locked{ overflow:hidden; }
             <div class="poi-dist">ab Haus</div>
           </li>
           <li>
+            <div class="poi-name">Gaisalpsee <small>Wanderziel mit Alpenpanorama</small></div>
+            <div class="poi-dist">ca. 12 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Nebelhorn <small>Bergerlebnis mit Seilbahn</small></div>
+            <div class="poi-dist">ca. 10 km</div>
+          </li>
+          <li>
             <div class="poi-name">Oberstdorf · Zentrum <small>Bahnhof &amp; Fußgängerzone</small></div>
             <div class="poi-dist">ca. 6 km</div>
+          </li>
+          <li>
+            <div class="poi-name">Kleinwalsertal <small>Österreichisches Nachbartal</small></div>
+            <div class="poi-dist">ca. 15 km</div>
           </li>
         </ul>
 
         <ul class="poi-list" id="poi-winter" style="display:none;">
           <li>
-            <div class="poi-name">Winterloipe Tiefenbach–Ferlewang <small>Skating &amp; klassisch</small></div>
-            <div class="poi-dist">5 Min. zu Fuß</div>
+            <div class="poi-name">Söllereck <small>Familien-Skigebiet</small></div>
+            <div class="poi-dist">ca. 8 km</div>
           </li>
           <li>
-            <div class="poi-name">Söllereck-Bahn <small>Familien-Skigebiet</small></div>
-            <div class="poi-dist">ca. 8 – 10 km</div>
+            <div class="poi-name">Nebelhorn <small>Skigebiet &amp; Variantengelände</small></div>
+            <div class="poi-dist">ca. 10 km</div>
           </li>
           <li>
-            <div class="poi-name">Oberstdorfer Skigebiet <small>Nebelhorn · Fellhorn</small></div>
-            <div class="poi-dist">ca. 8 – 10 km</div>
+            <div class="poi-name">Fellhorn <small>Skigebiet mit Panoramapiste</small></div>
+            <div class="poi-dist">ca. 12 km</div>
           </li>
           <li>
-            <div class="poi-name">Grasgehren <small>Ski- und Wandergebiet</small></div>
+            <div class="poi-name">Hörnerbahn <small>Winterwandern &amp; Rodeln</small></div>
             <div class="poi-dist">in der Nähe</div>
           </li>
           <li>
-            <div class="poi-name">Allgäu Coaster Söllereck <small>Ganzjahres-Rodelbahn</small></div>
-            <div class="poi-dist">ca. 8 – 10 km</div>
+            <div class="poi-name">Kleinwalsertal <small>Skigebiet Kanzelwand &amp; Fellhorn</small></div>
+            <div class="poi-dist">ca. 15 km</div>
           </li>
           <li>
-            <div class="poi-name">Skikeller am Haus <small>Schuhe trocknen, Ski lagern</small></div>
-            <div class="poi-dist">vor Ort</div>
+            <div class="poi-name">Riedbergpass <small>Winterloipe &amp; Schneeschuhwandern</small></div>
+            <div class="poi-dist">ab Haus</div>
           </li>
           <li>
-            <div class="poi-name">Bushaltestelle <small>Allgäu-Walser-Karte: kostenfreie Fahrten</small></div>
-            <div class="poi-dist">vor der Tür</div>
+            <div class="poi-name">Oberstdorf <small>Eislaufen &amp; Nordische Arena</small></div>
+            <div class="poi-dist">ca. 6 km</div>
           </li>
         </ul>
 
@@ -2588,6 +2608,15 @@ body.lb-locked{ overflow:hidden; }
       btn.classList.add('active');
       document.getElementById('poi-sommer').style.display = (season==='sommer') ? '' : 'none';
       document.getElementById('poi-winter').style.display = (season==='winter') ? '' : 'none';
+      if (window._lageMap) {
+        if (season === 'sommer') {
+          window._lageMap.sommerLayer.addTo(window._lageMap.map);
+          window._lageMap.winterLayer.remove();
+        } else {
+          window._lageMap.winterLayer.addTo(window._lageMap.map);
+          window._lageMap.sommerLayer.remove();
+        }
+      }
     });
   });
 
@@ -2624,6 +2653,67 @@ body.lb-locked{ overflow:hidden; }
       if (i === rangeStart || i === rangeEnd) d.classList.add('range','range-edge');
       if (i === 14) d.classList.add('today');
       grid.appendChild(d);
+    }
+  })();
+</script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  // Leaflet must load after its script tag — re-run init if map not yet rendered
+  (function(){
+    if (!window._lageMap && document.getElementById('lage-map') && typeof L !== 'undefined'){
+      // Trigger DOMContentLoaded-equivalent: dispatch a custom init event
+      // The init block above uses typeof L check, so just repeat it inline here
+      var map = L.map('lage-map', {
+        center: [47.405, 10.230],
+        zoom: 10,
+        zoomControl: false,
+        attributionControl: true,
+        scrollWheelZoom: false,
+        touchZoom: true
+      });
+      // Cmd/Ctrl + scroll wheel zooms the map
+      document.getElementById('lage-map').addEventListener('wheel', function(e){
+        if (e.ctrlKey || e.metaKey){
+          e.preventDefault();
+          e.stopPropagation();
+          if (e.deltaY < 0) map.zoomIn(); else map.zoomOut();
+        }
+      }, { passive: false });
+      L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://stamen.com">Stamen Design</a> &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+      function pinIcon(label){
+        // dot at top (at coordinate), label lower-left; iconAnchor = dot center
+        return L.divIcon({ className:'', iconSize:null, html:'<div class="lf-pin"><div class="lf-dot"></div><div class="lf-label">'+label+'</div></div>', iconAnchor:[7,7] });
+      }
+      function poiIcon(label){
+        return L.divIcon({ className:'', iconSize:null, html:'<div class="lf-poi"><div class="lf-poi-dot"></div><div class="lf-poi-label">'+label+'</div></div>', iconAnchor:[4,4] });
+      }
+
+      L.marker([47.4282, 10.2377], { icon: pinIcon('Hirschsprung'), zIndexOffset: 1000 }).addTo(map);
+      L.layerGroup([
+        L.marker([47.4077, 10.2781], { icon: poiIcon('Oberstdorf') }),
+        L.marker([47.3550, 10.1728], { icon: poiIcon('Kleinwalsertal') }),
+        L.marker([47.4360, 10.2352], { icon: poiIcon('Sturmannshöhle') })
+      ]).addTo(map);
+      var sommerLayer = L.layerGroup([
+        L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
+        L.marker([47.4219, 10.3423], { icon: poiIcon('Nebelhorn') }),
+        L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') }),
+        L.marker([47.3506, 10.2176], { icon: poiIcon('Fellhorn') })
+      ]).addTo(map);
+      var winterLayer = L.layerGroup([
+        L.marker([47.4373, 10.1769], { icon: poiIcon('Riedbergpass') }),
+        L.marker([47.4219, 10.3423], { icon: poiIcon('Nebelhorn') }),
+        L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
+        L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') })
+      ]);
+
+      document.getElementById('map-zoom-in').addEventListener('click', function(){ map.zoomIn(); });
+      document.getElementById('map-zoom-out').addEventListener('click', function(){ map.zoomOut(); });
+
+      window._lageMap = { map: map, sommerLayer: sommerLayer, winterLayer: winterLayer };
     }
   })();
 </script>
