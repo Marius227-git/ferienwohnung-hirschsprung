@@ -309,15 +309,45 @@ section.block{ padding:96px 0; }
 /* ════════════════════════════════════════════════════════════════
    SEKTION 3 · Emotionaler Teaser
    ════════════════════════════════════════════════════════════════ */
-.teaser{ background:var(--bg-cream); }
+.teaser{
+  position:relative;
+  background:#1C1F24;
+  color:var(--on-dark);
+  overflow:hidden;
+  isolation:isolate;
+}
+.teaser-bg{
+  position:absolute; left:0; right:0;
+  top:-15%; height:130%;
+  background:url('assets/teaser-bg.jpg') center center / cover no-repeat;
+  z-index:-2;
+  will-change:transform;
+  transform:translate3d(0, 0, 0);
+}
+.teaser::before{
+  content:'';
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(28,31,36,0.55) 0%, rgba(28,31,36,0.35) 40%, rgba(28,31,36,0.55) 100%),
+    radial-gradient(ellipse at center, rgba(28,31,36,0.10) 0%, rgba(28,31,36,0.45) 100%);
+  z-index:-1; pointer-events:none;
+}
+.teaser .container{ position:relative; z-index:1; }
 .teaser-inner{ max-width:720px; margin:0 auto; text-align:center; }
 .teaser-inner .eyebrow-wrap{ justify-content:center; margin-bottom:20px; }
-.teaser h2{ margin-bottom:28px; font-style:italic; }
+.teaser .eyebrow{ color:var(--sun-500); }
+.teaser h2{ color:var(--on-dark); margin-bottom:28px; font-style:italic; text-shadow:0 1px 24px rgba(28,31,36,0.4); }
 .teaser p{
-  font-size:17.5px; line-height:1.85; color:var(--slate-700);
+  font-size:17.5px; line-height:1.85; color:rgba(245,242,234,0.92);
   margin-bottom:18px;
+  text-shadow:0 1px 16px rgba(28,31,36,0.45);
 }
-.teaser p:last-child{ font-family:var(--font-serif); font-size:21px; font-style:italic; color:var(--slate-800); line-height:1.45; margin-top:32px; }
+.teaser p:last-child{ font-family:var(--font-serif); font-size:21px; font-style:italic; color:var(--on-dark); line-height:1.45; margin-top:32px; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .teaser-bg{ transform:none !important; }
+}
 
 /* ════════════════════════════════════════════════════════════════
    SEKTION 4 · CONVERSION-ANKER (kompakt)
@@ -1471,6 +1501,7 @@ body.lb-locked{ overflow:hidden; }
 
 <!-- ════════════════════════════════════════════════════════════ 3 · TEASER -->
 <section class="block teaser" data-screen-label="03 Teaser">
+  <div class="teaser-bg" aria-hidden="true"></div>
   <div class="container">
     <div class="teaser-inner">
       <div class="eyebrow-wrap"><p class="eyebrow">ALLES WAS SIE BRAUCHEN</p></div>
@@ -2497,6 +2528,38 @@ body.lb-locked{ overflow:hidden; }
     }
     window.addEventListener('scroll', update, { passive:true });
     window.addEventListener('resize', update);
+    update();
+  })();
+
+  // ── Teaser parallax (iOS-friendly) ───────────────────────────
+  (function(){
+    var teaser = document.querySelector('.teaser');
+    var bg = teaser && teaser.querySelector('.teaser-bg');
+    if (!bg) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var ticking = false;
+    var inView = false;
+    var SPEED = 0.25;
+    function update(){
+      ticking = false;
+      var rect = teaser.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var center = rect.top + rect.height / 2;
+      var delta = (vh / 2) - center;
+      bg.style.transform = 'translate3d(0, ' + (delta * SPEED).toFixed(1) + 'px, 0)';
+    }
+    function onScroll(){
+      if (!ticking){ ticking = true; requestAnimationFrame(update); }
+    }
+    if ('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ inView = e.isIntersecting; });
+        if (inView) onScroll();
+      }, { rootMargin: '120px 0px' });
+      io.observe(teaser);
+    } else { inView = true; }
+    window.addEventListener('scroll', function(){ if (inView) onScroll(); }, { passive:true });
+    window.addEventListener('resize', onScroll, { passive:true });
     update();
   })();
 
