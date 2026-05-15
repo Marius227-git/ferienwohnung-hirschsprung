@@ -615,22 +615,9 @@ section.block{ padding:96px 0; }
 /* ════════════════════════════════════════════════════════════════
    SEKTION 7 · Lage & Umgebung
    ════════════════════════════════════════════════════════════════ */
-.lage-toggle{
-  display:inline-flex; padding:4px; background:var(--bg-cream);
-  border:0.5px solid var(--slate-200); border-radius:999px;
-  margin:0 auto 40px; gap:2px;
-}
-.lage-toggle button{
-  font:500 13px/1 var(--font-sans); padding:10px 22px;
-  background:transparent; border:none; border-radius:999px;
-  color:var(--slate-500); cursor:pointer;
-  transition:background var(--t-base), color var(--t-base);
-}
-.lage-toggle button.active{ background:var(--slate-800); color:var(--on-dark); }
-.lage-toggle button:hover:not(.active){ color:var(--slate-800); }
 
 .lage-layout{
-  display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:start;
+  display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:center;
 }
 .map-box{
   aspect-ratio:1.23/1;
@@ -703,7 +690,7 @@ section.block{ padding:96px 0; }
 
 .poi-list{ list-style:none; padding:0; margin:0; }
 .poi-list li{
-  display:grid; grid-template-columns:1fr auto; gap:16px; align-items:baseline;
+  display:grid; grid-template-columns:1fr auto auto; gap:16px; align-items:center;
   padding:14px 0; border-bottom:0.5px solid var(--slate-200);
   font-size:14.5px;
 }
@@ -714,6 +701,12 @@ section.block{ padding:96px 0; }
   font-family:var(--font-sans); color:var(--sun-700); font-weight:500;
   font-variant-numeric:tabular-nums; font-size:13px; white-space:nowrap;
 }
+.poi-nav{
+  display:flex; align-items:center; justify-content:center;
+  color:var(--slate-400); transition:color var(--t-base);
+  width:28px; height:28px; border-radius:50%;
+}
+.poi-nav:hover{ color:var(--slate-800); background:var(--slate-100); }
 
 .lage-note{
   margin-top:24px;
@@ -1898,10 +1891,6 @@ body.lb-locked{ overflow:hidden; }
       <h2>Zwischen Tiefenbach und Obermaiselstein.</h2>
       <p>Zu Fuß oder mit dem Rad direkt eine Tour ins Lochbachtal oder Rohrmoos starten. Bushaltestelle direkt vor der Haustür.</p>
 
-      <div class="lage-toggle" role="tablist" aria-label="Saison wählen">
-        <button type="button" class="active" data-season="sommer">Sommer</button>
-        <button type="button" data-season="winter">Winter</button>
-      </div>
     </div>
 
     <div class="lage-layout">
@@ -1917,65 +1906,86 @@ body.lb-locked{ overflow:hidden; }
       </div>
 
       <div>
-        <ul class="poi-list" id="poi-sommer">
+        <ul class="poi-list">
+          <li>
+            <div class="poi-name">Lochbachtal <small>Idyllisches Tal, direkt zu Fuß erreichbar</small></div>
+            <div class="poi-dist">ab Haus</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Lochbachtal/@47.4204218,10.1832602,3795m/data=!3m1!1e3!4m15!1m8!3m7!1s0x479c9dc13558458f:0xa1e48b04cf7d9d0!2s87561+Oberstdorf-Rohrmoos!3b1!8m2!3d47.406391!4d10.1665379!16s%2Fg%2F12135qm4!3m5!1s0x479c9d793e7e1169:0x26eca1a9e0bdd642!8m2!3d47.4202051!4d10.1773804!16s%2Fg%2F11qf_vs3wg?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Rohrmoostal <small>Naturidylle zum Wandern &amp; Biken</small></div>
+            <div class="poi-dist">ab Haus</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/87561+Oberstdorf-Rohrmoos/@47.4130082,10.1725231,3731m/data=!3m1!1e3!4m6!3m5!1s0x479c9dc13558458f:0xa1e48b04cf7d9d0!8m2!3d47.406391!4d10.1665379!16s%2Fg%2F12135qm4?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Riedbergpass <small>Höchster Gebirgspass Deutschlands, Loipe im Winter</small></div>
+            <div class="poi-dist">ab Haus</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Riedbergpass/@47.4369654,10.1576578,3893m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9d0c31e70651:0x583738a63a56cf76!8m2!3d47.4369676!4d10.1771416!16s%2Fg%2F120qcwgk?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
           <li>
             <div class="poi-name">Sturmannshöhle <small>Naturhöhle, 460 m, mit Führung</small></div>
             <div class="poi-dist">1 – 1,5 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Sturmannsh%C3%B6hle+Obermaiselstein/@47.4360342,10.2328819,973m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9c9cda9ebc2d:0xe498867a65f62348!8m2!3d47.4360342!4d10.2354568!16s%2Fg%2F121qyfmf?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
           <li>
-            <div class="poi-name">Hörnerbahn <small>Bergtouren &amp; Panoramablick</small></div>
+            <div class="poi-name">Hörnerbahn <small>Bergtouren, Winterwandern &amp; Panoramablick</small></div>
             <div class="poi-dist">in der Nähe</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/H%C3%B6rnerbahn+GmbH+%26+Co.+KG/@47.4629953,10.225159,1945m/data=!3m3!1e3!4b1!5s0x479c9ccdbdcf414d:0xcbe5f479499a2744!4m6!3m5!1s0x479c9ccb0504730d:0x40c6fa084175d100!8m2!3d47.4629953!4d10.2277339!16s%2Fg%2F1tfbm92_?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
           <li>
-            <div class="poi-name">Riedbergpass <small>Höchster Auto-Gebirgspass Deutschlands</small></div>
-            <div class="poi-dist">ab Haus</div>
+            <div class="poi-name">Breitachklamm <small>Beeindruckende Wildwasserschlucht</small></div>
+            <div class="poi-dist">ca. 4 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Breitachklamm,+Klammstra%C3%9Fe,+Oberstdorf/@47.4360342,10.2328819,973m/data=!3m1!1e3!4m5!3m4!1s0x479c9c0b96fdae31:0x6959093da5464b54!8m2!3d47.401726!4d10.2297446?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Allgäu Coaster <small>Sommerrodelbahn für die ganze Familie</small></div>
+            <div class="poi-dist">ca. 4 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Allg%C3%A4u+Coaster+(Sommerrodelbahn)/@47.3997892,10.2412425,974m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9bf209a4a9a3:0xad9f9a9f5552ca7b!8m2!3d47.3997893!4d10.2461134!16s%2Fg%2F11bzq2sgmh?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Oberstdorf <small>Fußgängerzone, Bahnhof &amp; Nordische Arena</small></div>
+            <div class="poi-dist">ca. 6 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/87561+Oberstdorf/@47.370797,10.1537294,31181m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9945f7818747:0x41e48add78c3770!8m2!3d47.4098581!4d10.2797448!16zL20vMDY2MGN2?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Söllereck <small>Familien-Skigebiet &amp; Sommerausflugsziel</small></div>
+            <div class="poi-dist">ca. 8 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/S%C3%B6llereck/@47.3666657,10.2230336,3898m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c994813270cf7:0xb91a4438f55ad344!8m2!3d47.3666667!4d10.2333333!16s%2Fm%2F0cc6r9w?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Oytal <small>Wildromantisches Hochtal, Ausgangspunkt für Touren</small></div>
+            <div class="poi-dist">ca. 8 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Oytal/@47.3895526,10.3126192,3896m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9a0edff746e7:0x53f53492edf295!8m2!3d47.3895536!4d10.3229189!16s%2Fg%2F121zz_nz?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Nebelhorn <small>Panorama-Seilbahn, Ski &amp; Hochalpines Gelände</small></div>
+            <div class="poi-dist">ca. 10 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Nebelhorn/@47.370797,10.1537294,31181m/data=!3m1!1e3!4m6!3m5!1s0x479c9a8279e69661:0x3ec5b5fd10fe6a72!8m2!3d47.4218361!4d10.3422401!16zL20vMDY2MGRf?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Christlessee <small>Idyllischer Bergsee, schönes Wanderziel</small></div>
+            <div class="poi-dist">ca. 10 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Christlessee/@47.3640174,10.2979173,975m/data=!3m1!1e3!4m6!3m5!1s0x479c99ec0d066b53:0xf85c137c9ffe73f0!8m2!3d47.3647442!4d10.3014118!16s%2Fg%2F120ztyft?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
+          </li>
+          <li>
+            <div class="poi-name">Fellhorn <small>Gipfel 2037 m, Skigebiet &amp; Panoramatouren</small></div>
+            <div class="poi-dist">ca. 12 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Fellhorn/@47.3506859,10.2075203,3899m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c992b14e16c43:0x1d1e48aecf891d30!8m2!3d47.3506869!4d10.21782!16zL20vMDY2Ams4?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
           <li>
             <div class="poi-name">Gaisalpsee <small>Wanderziel mit Alpenpanorama</small></div>
             <div class="poi-dist">ca. 12 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Unterer+Gaisalpsee/@47.4273478,10.3216396,487m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9a9264a24bc9:0xe6f066e7e8e14880!8m2!3d47.4275145!4d10.3237445!16s%2Fg%2F122m3vlk?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
           <li>
-            <div class="poi-name">Nebelhorn <small>Bergerlebnis mit Seilbahn</small></div>
-            <div class="poi-dist">ca. 10 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Oberstdorf · Zentrum <small>Bahnhof &amp; Fußgängerzone</small></div>
-            <div class="poi-dist">ca. 6 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Kleinwalsertal <small>Österreichisches Nachbartal</small></div>
+            <div class="poi-name">Kleinwalsertal <small>Österreichisches Nachbartal, Kanzelwand &amp; Fellhorn</small></div>
             <div class="poi-dist">ca. 15 km</div>
-          </li>
-        </ul>
-
-        <ul class="poi-list" id="poi-winter" style="display:none;">
-          <li>
-            <div class="poi-name">Söllereck <small>Familien-Skigebiet</small></div>
-            <div class="poi-dist">ca. 8 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Kleinwalsertal/@47.3458035,10.1597598,3899m/data=!3m2!1e3!4b1!4m6!3m5!1s0x479c9f06a6296a3f:0x37e51a91996bb268!8m2!3d47.3458045!4d10.1700595!16zL20vMDhnOTEz?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
           <li>
-            <div class="poi-name">Nebelhorn <small>Skigebiet &amp; Variantengelände</small></div>
-            <div class="poi-dist">ca. 10 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Fellhorn <small>Skigebiet mit Panoramapiste</small></div>
-            <div class="poi-dist">ca. 12 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Hörnerbahn <small>Winterwandern &amp; Rodeln</small></div>
-            <div class="poi-dist">in der Nähe</div>
-          </li>
-          <li>
-            <div class="poi-name">Kleinwalsertal <small>Skigebiet Kanzelwand &amp; Fellhorn</small></div>
-            <div class="poi-dist">ca. 15 km</div>
-          </li>
-          <li>
-            <div class="poi-name">Riedbergpass <small>Winterloipe &amp; Schneeschuhwandern</small></div>
-            <div class="poi-dist">ab Haus</div>
-          </li>
-          <li>
-            <div class="poi-name">Oberstdorf <small>Eislaufen &amp; Nordische Arena</small></div>
-            <div class="poi-dist">ca. 6 km</div>
+            <div class="poi-name">Hoher Ifen <small>Markanter Tafelberg, 2230 m, Ski &amp; Wandern</small></div>
+            <div class="poi-dist">ca. 20 km</div>
+            <a class="poi-nav" href="https://www.google.com/maps/place/Hoher+Ifen/@47.3579083,10.2399627,6394m/data=!3m1!1e3!4m6!3m5!1s0x479b6033976743df:0xc132db304c9e92a6!8m2!3d47.354554!4d10.099475!16s%2Fm%2F0cc6qj9?entry=ttu&g_ep=EgoyMDI2MDUxMi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener" aria-label="In Google Maps öffnen"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></a>
           </li>
         </ul>
 
@@ -2600,25 +2610,6 @@ body.lb-locked{ overflow:hidden; }
     });
   });
 
-  // ── Lage Sommer/Winter Toggle ────────────────────────────────
-  document.querySelectorAll('.lage-toggle button').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var season = btn.getAttribute('data-season');
-      document.querySelectorAll('.lage-toggle button').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      document.getElementById('poi-sommer').style.display = (season==='sommer') ? '' : 'none';
-      document.getElementById('poi-winter').style.display = (season==='winter') ? '' : 'none';
-      if (window._lageMap) {
-        if (season === 'sommer') {
-          window._lageMap.sommerLayer.addTo(window._lageMap.map);
-          window._lageMap.winterLayer.remove();
-        } else {
-          window._lageMap.winterLayer.addTo(window._lageMap.map);
-          window._lageMap.sommerLayer.remove();
-        }
-      }
-    });
-  });
 
   // ── Smooth scroll w/ sticky-nav offset ───────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
@@ -2698,20 +2689,15 @@ body.lb-locked{ overflow:hidden; }
         L.marker([47.3648, 10.3015], { icon: poiIcon('Christlessee') }),
         L.marker([47.3903, 10.3357], { icon: poiIcon('Oytal') }),
         L.marker([47.4079, 10.1847], { icon: poiIcon('Rohrmoostal') }),
-        L.marker([47.4253, 10.2179], { icon: poiIcon('Lochbachtal') })
+        L.marker([47.4253, 10.2179], { icon: poiIcon('Lochbachtal') }),
+        L.marker([47.3999, 10.2458], { icon: poiIcon('Allgäu Coaster') }),
+      L.marker([47.4017, 10.2297], { icon: poiIcon('Breitachklamm') })
       ]).addTo(map);
-      var sommerLayer = L.layerGroup([
-        L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
-        L.marker([47.4219, 10.3423], { icon: poiIcon('Nebelhorn') }),
-        L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') }),
-        L.marker([47.3506, 10.2176], { icon: poiIcon('Fellhorn') })
-      ]).addTo(map);
-      var winterLayer = L.layerGroup([
-        L.marker([47.4373, 10.1769], { icon: poiIcon('Riedbergpass') }),
-        L.marker([47.4219, 10.3423], { icon: poiIcon('Nebelhorn') }),
-        L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
-        L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') })
-      ]);
+      L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }).addTo(map);
+      L.marker([47.4219, 10.3423], { icon: poiIcon('Nebelhorn') }).addTo(map);
+      L.marker([47.3736, 10.2376], { icon: poiIcon('Söllereck') }).addTo(map);
+      L.marker([47.3506, 10.2176], { icon: poiIcon('Fellhorn') }).addTo(map);
+      L.marker([47.4373, 10.1769], { icon: poiIcon('Riedbergpass') }).addTo(map);
 
       // Fit to all marker coordinates with padding for labels
       // Center balances Hoher Ifen (west) against Nebelhorn/Oytal (east) at zoom 11
@@ -2720,7 +2706,7 @@ body.lb-locked{ overflow:hidden; }
       document.getElementById('map-zoom-in').addEventListener('click', function(){ map.zoomIn(); });
       document.getElementById('map-zoom-out').addEventListener('click', function(){ map.zoomOut(); });
 
-      window._lageMap = { map: map, sommerLayer: sommerLayer, winterLayer: winterLayer };
+      window._lageMap = { map: map };
     }
   })();
 </script>
