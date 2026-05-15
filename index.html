@@ -2693,7 +2693,10 @@ body.lb-locked{ overflow:hidden; }
       L.layerGroup([
         L.marker([47.4077, 10.2781], { icon: poiIcon('Oberstdorf') }),
         L.marker([47.3550, 10.1728], { icon: poiIcon('Kleinwalsertal') }),
-        L.marker([47.4360, 10.2352], { icon: poiIcon('Sturmannshöhle') })
+        L.marker([47.4360, 10.2352], { icon: poiIcon('Sturmannshöhle') }),
+        L.marker([47.3547, 10.1002], { icon: poiIcon('Hoher Ifen') }),
+        L.marker([47.3648, 10.3015], { icon: poiIcon('Christlessee') }),
+        L.marker([47.3903, 10.3357], { icon: poiIcon('Oytal') })
       ]).addTo(map);
       var sommerLayer = L.layerGroup([
         L.marker([47.4630, 10.2275], { icon: poiIcon('Hörnerbahn') }),
@@ -2718,7 +2721,10 @@ body.lb-locked{ overflow:hidden; }
         [47.3736, 10.2376], // Söllereck
         [47.3550, 10.1728], // Kleinwalsertal
         [47.3506, 10.2176], // Fellhorn
-        [47.4373, 10.1769]  // Riedbergpass (winter)
+        [47.4373, 10.1769], // Riedbergpass (winter)
+        [47.3547, 10.1002], // Hoher Ifen
+        [47.3648, 10.3015], // Christlessee
+        [47.3903, 10.3357]  // Oytal
       ];
       map.fitBounds(_bounds, { padding: [52, 52] });
 
