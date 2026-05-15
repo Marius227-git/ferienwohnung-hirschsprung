@@ -1043,7 +1043,8 @@ section.block{ padding:96px 0; }
 .faq-item.open .chev{ transform:rotate(180deg); stroke:var(--sun-700); }
 .faq-a{
   height:0; overflow:hidden;
-  transition:height 0.35s cubic-bezier(0.22,1,0.36,1), padding-top 0.35s cubic-bezier(0.22,1,0.36,1);
+  padding-top:14px;
+  transition:height 0.35s cubic-bezier(0.22,1,0.36,1);
   font-size:15px; color:var(--slate-700); line-height:1.75;
 }
 .faq-a p{ max-width:680px; }
@@ -2709,21 +2710,20 @@ body.lb-locked{ overflow:hidden; }
       var opening = !item.classList.contains('open');
       if(opening){
         item.classList.add('open');
+        ans.style.height = '0';
+        ans.offsetHeight; // force reflow so browser sees 0 before animating
         ans.style.height = ans.scrollHeight + 'px';
-        ans.style.paddingTop = '14px';
-        ans.addEventListener('transitionend', function h(){
+        ans.addEventListener('transitionend', function h(e){
+          if(e.propertyName !== 'height') return;
           ans.style.height = 'auto';
           ans.removeEventListener('transitionend', h);
         });
       } else {
         ans.style.height = ans.scrollHeight + 'px';
-        ans.style.paddingTop = '';
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            ans.style.height = '0';
-          });
-        });
-        ans.addEventListener('transitionend', function h(){
+        ans.offsetHeight; // force reflow so browser sees current height
+        ans.style.height = '0';
+        ans.addEventListener('transitionend', function h(e){
+          if(e.propertyName !== 'height') return;
           item.classList.remove('open');
           ans.removeEventListener('transitionend', h);
         });
@@ -2739,19 +2739,20 @@ body.lb-locked{ overflow:hidden; }
       var opening = !item.classList.contains('open');
       if(opening){
         item.classList.add('open');
+        ans.style.height = '0';
+        ans.offsetHeight;
         ans.style.height = ans.scrollHeight + 'px';
-        ans.addEventListener('transitionend', function h(){
+        ans.addEventListener('transitionend', function h(e){
+          if(e.propertyName !== 'height') return;
           ans.style.height = 'auto';
           ans.removeEventListener('transitionend', h);
         });
       } else {
         ans.style.height = ans.scrollHeight + 'px';
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            ans.style.height = '0';
-          });
-        });
-        ans.addEventListener('transitionend', function h(){
+        ans.offsetHeight;
+        ans.style.height = '0';
+        ans.addEventListener('transitionend', function h(e){
+          if(e.propertyName !== 'height') return;
           item.classList.remove('open');
           ans.removeEventListener('transitionend', h);
         });
