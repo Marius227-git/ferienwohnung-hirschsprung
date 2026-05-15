@@ -1043,10 +1043,10 @@ section.block{ padding:96px 0; }
 }
 .faq-item.open .chev{ transform:rotate(180deg); stroke:var(--sun-700); }
 .faq-a{
-  max-height:0; overflow:hidden; transition:max-height var(--t-base);
+  height:0; overflow:hidden;
+  transition:height 0.35s cubic-bezier(0.22,1,0.36,1), padding-top 0.35s cubic-bezier(0.22,1,0.36,1);
   font-size:15px; color:var(--slate-700); line-height:1.75;
 }
-.faq-item.open .faq-a{ max-height:240px; padding-top:14px; }
 .faq-a p{ max-width:680px; }
 
 /* ════════════════════════════════════════════════════════════════
@@ -2705,7 +2705,30 @@ body.lb-locked{ overflow:hidden; }
   // ── FAQ accordion ────────────────────────────────────────────
   document.querySelectorAll('.faq-item .faq-q').forEach(function(q){
     q.addEventListener('click', function(){
-      q.parentElement.classList.toggle('open');
+      var item = q.parentElement;
+      var ans = item.querySelector('.faq-a');
+      var opening = !item.classList.contains('open');
+      if(opening){
+        item.classList.add('open');
+        ans.style.height = ans.scrollHeight + 'px';
+        ans.style.paddingTop = '14px';
+        ans.addEventListener('transitionend', function h(){
+          ans.style.height = 'auto';
+          ans.removeEventListener('transitionend', h);
+        });
+      } else {
+        ans.style.height = ans.scrollHeight + 'px';
+        ans.style.paddingTop = '';
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            ans.style.height = '0';
+          });
+        });
+        ans.addEventListener('transitionend', function h(){
+          item.classList.remove('open');
+          ans.removeEventListener('transitionend', h);
+        });
+      }
     });
   });
 
