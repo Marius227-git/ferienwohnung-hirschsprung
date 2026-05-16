@@ -2702,62 +2702,45 @@ body.lb-locked{ overflow:hidden; }
     update();
   })();
 
+  // ── Accordion helper ─────────────────────────────────────────
+  function accordionToggle(item, ansSelector, paddingOpen){
+    var ans = item.querySelector(ansSelector);
+    if(!ans) return;
+    var opening = !item.classList.contains('open');
+    if(opening){
+      item.classList.add('open');
+      if(paddingOpen) ans.style.paddingTop = paddingOpen;
+      ans.style.height = '0';
+      ans.offsetHeight; // force reflow
+      ans.style.height = ans.scrollHeight + 'px';
+      ans.addEventListener('transitionend', function h(e){
+        if(e.propertyName !== 'height') return;
+        ans.style.height = 'auto';
+        ans.removeEventListener('transitionend', h);
+      });
+    } else {
+      ans.style.height = ans.scrollHeight + 'px';
+      ans.offsetHeight; // force reflow
+      ans.style.height = '0';
+      if(paddingOpen) ans.style.paddingTop = '';
+      ans.addEventListener('transitionend', function h(e){
+        if(e.propertyName !== 'height') return;
+        item.classList.remove('open');
+        ans.removeEventListener('transitionend', h);
+      });
+    }
+  }
+
   // ── FAQ accordion ────────────────────────────────────────────
+  document.querySelectorAll('.faq-item.open .faq-a').forEach(function(ans){ ans.style.height = 'auto'; });
   document.querySelectorAll('.faq-item .faq-q').forEach(function(q){
-    q.addEventListener('click', function(){
-      var item = q.parentElement;
-      var ans = item.querySelector('.faq-a');
-      var opening = !item.classList.contains('open');
-      if(opening){
-        item.classList.add('open');
-        ans.style.height = '0';
-        ans.offsetHeight; // force reflow so browser sees 0 before animating
-        ans.style.height = ans.scrollHeight + 'px';
-        ans.addEventListener('transitionend', function h(e){
-          if(e.propertyName !== 'height') return;
-          ans.style.height = 'auto';
-          ans.removeEventListener('transitionend', h);
-        });
-      } else {
-        ans.style.height = ans.scrollHeight + 'px';
-        ans.offsetHeight; // force reflow so browser sees current height
-        ans.style.height = '0';
-        ans.addEventListener('transitionend', function h(e){
-          if(e.propertyName !== 'height') return;
-          item.classList.remove('open');
-          ans.removeEventListener('transitionend', h);
-        });
-      }
-    });
+    q.addEventListener('click', function(){ accordionToggle(q.parentElement, '.faq-a'); });
   });
 
   // ── Booking terms accordion ──────────────────────────────────
+  document.querySelectorAll('.terms-row.open .terms-a').forEach(function(ans){ ans.style.height = 'auto'; });
   document.querySelectorAll('.terms-row .terms-q').forEach(function(q){
-    q.addEventListener('click', function(){
-      var item = q.parentElement;
-      var ans = item.querySelector('.terms-a');
-      var opening = !item.classList.contains('open');
-      if(opening){
-        item.classList.add('open');
-        ans.style.height = '0';
-        ans.offsetHeight;
-        ans.style.height = ans.scrollHeight + 'px';
-        ans.addEventListener('transitionend', function h(e){
-          if(e.propertyName !== 'height') return;
-          ans.style.height = 'auto';
-          ans.removeEventListener('transitionend', h);
-        });
-      } else {
-        ans.style.height = ans.scrollHeight + 'px';
-        ans.offsetHeight;
-        ans.style.height = '0';
-        ans.addEventListener('transitionend', function h(e){
-          if(e.propertyName !== 'height') return;
-          item.classList.remove('open');
-          ans.removeEventListener('transitionend', h);
-        });
-      }
-    });
+    q.addEventListener('click', function(){ accordionToggle(q.parentElement, '.terms-a'); });
   });
 
 
